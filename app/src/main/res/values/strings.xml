@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Nome do app</string>
+    <string name="loading">Carregando</string>
+    <string name="loading_msg">Carregando audios…</string>
+</resources>
