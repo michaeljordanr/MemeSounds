@@ -8,7 +8,7 @@ or other details to help you with your experience.
 
 When do we collect information?
 
-We collect information from you when you or enter information on our site.
+No, never.
 
 
 How do we use your information?
