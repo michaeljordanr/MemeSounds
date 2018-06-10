@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 import java.util.List;
@@ -19,6 +21,7 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.RecyclerView
     private Context context;
     private RecyclerAdapterOnClickListener callbackOnClick;
     private RecyclerAdapterOnLongListener callbackOnLongClick;
+    private int lastPosition = -1;
 
     public interface RecyclerAdapterOnClickListener{
         void onClick(Audio audio);
@@ -59,6 +62,25 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.RecyclerView
             holder.audioButton.setText(audio.getAudioDescription());
         }
 
+        setAnimation(holder.itemView, position);
+
+    }
+
+    private void setAnimation(View viewToAnimate, int position)
+    {
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position > lastPosition)
+        {
+            Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
+            animation.setDuration(500);
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
+        }
+    }
+
+    @Override
+    public void onViewDetachedFromWindow(@NonNull RecyclerViewHolder holder) {
+        holder.clearAnimation();
     }
 
     @Override
@@ -96,6 +118,11 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.RecyclerView
             int position = getAdapterPosition();
             callbackOnLongClick.onLongClick(audioList.get(position));
             return true;
+        }
+
+        public void clearAnimation()
+        {
+            itemView.clearAnimation();
         }
     }
 

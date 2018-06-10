@@ -1,13 +1,19 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'memesound'
+            keyPassword 'memesound'
+            storeFile file("/$rootDir/meme_sound_keystore.jks")
+            storePassword 'memesound'
+        }
+    }
     compileSdkVersion 27
     buildToolsVersion '27.0.3'
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -24,14 +30,18 @@ android {
     }
 
     flavorDimensions 'tier'
-
     productFlavors {
         negaoDeRosa {
             applicationId = 'com.michaeljordanr.memesounds.negaoderosa'
+            signingConfig signingConfigs.config
+            versionCode 1
+            versionName "1.0"
         }
-
         romuloMendonca {
             applicationId = 'com.michaeljordanr.memesounds.romulomendonca'
+            signingConfig signingConfigs.config
+            versionCode 2
+            versionName "1.1"
         }
     }
 }
@@ -42,10 +52,11 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.1'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'com.android.support:cardview-v7:27.1.1'
     implementation 'com.jakewharton:butterknife:8.8.1'
+    implementation 'com.android.support:design:27.1.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'com.google.code.gson:gson:2.8.2'
     testImplementation 'junit:junit:4.12'

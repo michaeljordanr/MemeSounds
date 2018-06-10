@@ -14,7 +14,7 @@ public class SplashActivity extends AppCompatActivity implements Runnable {
         setContentView(R.layout.activity_splash);
 
         Handler h = new Handler();
-        h.postDelayed(this, 3000);
+        h.postDelayed(this, 2000);
     }
 
     @Override
