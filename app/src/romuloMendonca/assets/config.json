@@ -160,5 +160,35 @@
 		"audio_name": "tumbalacatumba",
 		"audio_description": "Tumbalacatumba",
 		"audio_thumb": ""
+	},
+	{
+		"id": 26,
+		"audio_name": "veneno_jararaca",
+		"audio_description": "O veneno da jararaca",
+		"audio_thumb": ""
+	},
+	{
+		"id": 27,
+		"audio_name": "o_dia_que_barba_mitou",
+		"audio_description": "O dia em que barba mitou",
+		"audio_thumb": ""
+	},
+	{
+		"id": 28,
+		"audio_name": "papaaaaaaaiii",
+		"audio_description": "PAPAAAAAAIIIIIII",
+		"audio_thumb": ""
+	},
+	{
+		"id": 29,
+		"audio_name": "denovo_com_palhacada",
+		"audio_description": "De novo com PALHAÇADA!!!",
+		"audio_thumb": ""
+	},
+	{
+		"id": 30,
+		"audio_name": "ele_arrasou_ele_roubou_meu_coracao",
+		"audio_description": "Ele arrasou, ele roubou meu coração!",
+		"audio_thumb": ""
 	}
 ]
