@@ -18,6 +18,11 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     flavorDimensions 'tier'
 
     productFlavors {
@@ -44,4 +49,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'com.google.code.gson:gson:2.8.2'
     testImplementation 'junit:junit:4.12'
+
+    implementation 'com.github.piasy:rxandroidaudio:1.5.2'
+    implementation 'com.github.piasy:AudioProcessor:1.5.2'
 }

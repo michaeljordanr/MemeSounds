@@ -17,7 +17,6 @@ import butterknife.ButterKnife;
 public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.RecyclerViewHolder> {
     private List<Audio> audioList;
     private Context context;
-    private SoundManager soundManager;
     private RecyclerAdapterOnClickListener callbackOnClick;
     private RecyclerAdapterOnLongListener callbackOnLongClick;
 
@@ -30,12 +29,10 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.RecyclerView
     }
 
     public AudioAdapter(Context context, RecyclerAdapterOnClickListener callbackOnClick,
-                        RecyclerAdapterOnLongListener callbackOnLongClick,
-                        SoundManager soundManager){
+                        RecyclerAdapterOnLongListener callbackOnLongClick){
         this.context = context;
         this.callbackOnClick = callbackOnClick;
         this.callbackOnLongClick = callbackOnLongClick;
-        this.soundManager = soundManager;
     }
 
     @NonNull
@@ -62,7 +59,6 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.RecyclerView
             holder.audioButton.setText(audio.getAudioDescription());
         }
 
-        soundManager.load(Utils.getRawId(context, audio.getAudioName()));
     }
 
     @Override

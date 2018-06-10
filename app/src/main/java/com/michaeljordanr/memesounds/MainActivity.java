@@ -15,6 +15,11 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 
+import com.github.piasy.rxandroidaudio.PlayConfig;
+import com.github.piasy.rxandroidaudio.RxAudioPlayer;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -24,17 +29,21 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 
 public class MainActivity extends AppCompatActivity implements AudioAdapter.RecyclerAdapterOnClickListener,
-        AudioAdapter.RecyclerAdapterOnLongListener, AudioAsyncTask.AudioAsyncTaskListener{
+        AudioAdapter.RecyclerAdapterOnLongListener{
 
-    private SoundManager soundManager;
-    int maxSimultaneousStreams = 3;
     private static final int PERMISSION_REQUEST = 333;
 
+    private RxAudioPlayer rxAudioPlayer;
+
+    private List<Audio> audioList;
     private AudioAdapter adapter;
-    Audio audioTemp;
+    private Audio audioTemp;
 
     @BindView(R.id.rv_buttons)
     RecyclerView recyclerView;
@@ -45,25 +54,76 @@ public class MainActivity extends AppCompatActivity implements AudioAdapter.Recy
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        new AudioAsyncTask(this, this).execute();
+        String jsonSource = Utils.loadJSONFromAsset(this,"config.json");
+        Type type = new TypeToken<List<Audio>>() {
+        }.getType();
+        audioList = new Gson().fromJson(jsonSource, type);
+
+        adapter = new AudioAdapter(this, this, this);
+        adapter.setData(audioList);
+
+        GridLayoutManager layoutManager = new GridLayoutManager(this,3);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(adapter);
+
+        rxAudioPlayer = RxAudioPlayer.getInstance();
+    }
+
+
+    @Override
+    public void onClick(Audio audio) {
+        int resourceId = Utils.getRawId(this, audio.getAudioName());
+
+        play(resourceId);
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        if (soundManager == null) {
-            new AudioAsyncTask(this, this).execute();
+    public void onLongClick(Audio audio) {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+                Toast.makeText(this, "Permissão necessária para o compartilhamento de audio",
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                audioTemp = audio;
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        PERMISSION_REQUEST);
+
+            }
+
+        } else {
+            shareAudio(Utils.getRawId(this, audio.getAudioName()));
         }
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
+    private void play(int resourceId){
+        PlayConfig audioLoaded = PlayConfig.res(getApplicationContext(), resourceId) // or play a raw resource
+                .looping(false) // loop or not
+                .leftVolume(1.0F) // left volume
+                .rightVolume(1.0F) // right volume
+                .build(); // build this config and play!
 
-        if (soundManager != null) {
-            soundManager.cancel();
-            soundManager = null;
-        }
+        rxAudioPlayer.play(audioLoaded)
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Boolean>() {
+                    @Override
+                    public void onSubscribe(final Disposable disposable) { }
+
+                    @Override
+                    public void onNext(final Boolean aBoolean) { }
+
+                    @Override
+                    public void onError(final Throwable throwable) { }
+
+                    @Override
+                    public void onComplete() { }
+                });
     }
 
     private void shareAudio(int audio){
@@ -91,55 +151,6 @@ public class MainActivity extends AppCompatActivity implements AudioAdapter.Recy
                 Uri.parse("file://" + Environment.getExternalStorageDirectory() + "/sound.mp3" ));
         intent.setType("audio/*");
         startActivity(Intent.createChooser(intent, "Share sound"));
-    }
-
-
-
-    @Override
-    public void onClick(Audio audio) {
-        int resourceId = Utils.getRawId(this, audio.getAudioName());
-        soundManager.load(resourceId);
-        soundManager.play(resourceId);
-    }
-
-    @Override
-    public void onLongClick(Audio audio) {
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-
-                Toast.makeText(this, "Permissão necessária para o compartilhamento de audio",
-                        Toast.LENGTH_SHORT).show();
-            } else {
-                audioTemp = audio;
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        PERMISSION_REQUEST);
-
-            }
-
-        } else {
-
-            shareAudio(Utils.getRawId(this, audio.getAudioName()));
-        }
-    }
-
-
-    @Override
-    public void onCompleteTask(List<Audio> audioList) {
-        soundManager = new SoundManager(this, maxSimultaneousStreams);
-        soundManager.start();
-
-        adapter = new AudioAdapter(this, this, this, soundManager);
-        adapter.setData(audioList);
-
-        GridLayoutManager layoutManager = new GridLayoutManager(this,3);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(adapter);
     }
 
     public void onRequestPermissionsResult(int requestCode,
