@@ -2,4 +2,8 @@
     <string name="app_name">Nome do app</string>
     <string name="loading">Carregando</string>
     <string name="loading_msg">Carregando audios…</string>
+    <string name="share_audio">Compartilhar</string>
+
+    <string name="request_explanation">"Permissão necessária para o compartilhamento de audio"</string>
+    <string name="request_denied">Permissão não concedida. Não é possível compartilhar audios.</string>
 </resources>

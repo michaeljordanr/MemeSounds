@@ -9,21 +9,4 @@
         <item name="actionBarStyle">@style/MyActionBar</item>
     </style>
 
-    <style name="MyActionBar" parent="@style/Widget.AppCompat.ActionBar.Solid">
-        <item name="titleTextStyle">@style/MyTitleTextStyle</item>
-    </style>
-
-    <style name="MyTitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textColor">@android:color/white</item>
-    </style>
-
-    <style name="Progress.Dialog.Theme" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="android:background">@android:color/white</item>
-        <item name="android:colorAccent">@color/colorAccent</item>
-        <item name="android:textColor">@android:color/black</item>
-    </style>
-
-    <style name="NoTitleBar" parent="AppTheme">
-        <item name="windowNoTitle">true</item>
-    </style>
 </resources>
