@@ -1,29 +1,17 @@
 package com.michaeljordanr.memesounds;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Environment;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
-
 
 import com.github.piasy.rxandroidaudio.PlayConfig;
 import com.github.piasy.rxandroidaudio.RxAudioPlayer;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.List;
 
@@ -37,13 +25,9 @@ import io.reactivex.schedulers.Schedulers;
 public class MainActivity extends AppCompatActivity implements AudioAdapter.RecyclerAdapterOnClickListener,
         AudioAdapter.RecyclerAdapterOnLongListener{
 
-    private static final int PERMISSION_REQUEST = 333;
+    private static final String uriAssetsProvider = "content://" + BuildConfig.APPLICATION_ID + "/";
 
     private RxAudioPlayer rxAudioPlayer;
-
-    private List<Audio> audioList;
-    private AudioAdapter adapter;
-    private Audio audioTemp;
 
     @BindView(R.id.rv_buttons)
     RecyclerView recyclerView;
@@ -57,9 +41,9 @@ public class MainActivity extends AppCompatActivity implements AudioAdapter.Recy
         String jsonSource = Utils.loadJSONFromAsset(this,"config.json");
         Type type = new TypeToken<List<Audio>>() {
         }.getType();
-        audioList = new Gson().fromJson(jsonSource, type);
+        List<Audio> audioList = new Gson().fromJson(jsonSource, type);
 
-        adapter = new AudioAdapter(this, this, this);
+        AudioAdapter adapter = new AudioAdapter(this, this, this);
         adapter.setData(audioList);
 
         GridLayoutManager layoutManager = new GridLayoutManager(this,3);
@@ -73,37 +57,17 @@ public class MainActivity extends AppCompatActivity implements AudioAdapter.Recy
 
     @Override
     public void onClick(Audio audio) {
-        int resourceId = Utils.getRawId(this, audio.getAudioName());
-
-        play(resourceId);
+        play(audio.getAudioName());
     }
 
     @Override
     public void onLongClick(Audio audio) {
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-
-                Toast.makeText(this, "Permissão necessária para o compartilhamento de audio",
-                        Toast.LENGTH_SHORT).show();
-            } else {
-                audioTemp = audio;
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        PERMISSION_REQUEST);
-
-            }
-
-        } else {
-            shareAudio(Utils.getRawId(this, audio.getAudioName()));
-        }
+        shareAudio(audio);
     }
 
-    private void play(int resourceId){
-        PlayConfig audioLoaded = PlayConfig.res(getApplicationContext(), resourceId) // or play a raw resource
+    private void play(String audioName){
+        PlayConfig audioLoaded = PlayConfig.file(Utils.getFileAudio(this, audioName))
+                //PlayConfig.res(getApplicationContext(), resourceId) // or play a raw resource
                 .looping(false) // loop or not
                 .leftVolume(1.0F) // left volume
                 .rightVolume(1.0F) // right volume
@@ -126,45 +90,16 @@ public class MainActivity extends AppCompatActivity implements AudioAdapter.Recy
                 });
     }
 
-    private void shareAudio(int audio){
-        InputStream inputStream;
-        FileOutputStream fileOutputStream;
-        try {
-            inputStream = getResources().openRawResource(audio);
-            fileOutputStream = new FileOutputStream(
-                    new File(Environment.getExternalStorageDirectory(), "sound.mp3"));
-
-            byte[] buffer = new byte[1024];
-            int length;
-            while ((length = inputStream.read(buffer)) > 0) {
-                fileOutputStream.write(buffer, 0, length);
-            }
-
-            inputStream.close();
-            fileOutputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+    private void shareAudio(Audio audio){
+        Uri uri = Uri.parse(uriAssetsProvider + audio.getAudioName() + Utils.AUDIO_FORMAT);
         Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.putExtra(Intent.EXTRA_STREAM,
-                Uri.parse("file://" + Environment.getExternalStorageDirectory() + "/sound.mp3" ));
         intent.setType("audio/*");
-        startActivity(Intent.createChooser(intent, "Share sound"));
+        intent.putExtra(Intent.EXTRA_STREAM, uri);
+        startActivity(Intent.createChooser(
+                intent,
+                getResources().getString(R.string.share_audio)
+                + " \"" + audio.getAudioDescription() + "\"")
+        );
     }
 
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String permissions[], @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case PERMISSION_REQUEST: {
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    shareAudio(Utils.getRawId(this, audioTemp.getAudioName()));
-                } else {
-                    Toast.makeText(this, "Permissão não concedida", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-        }
-    }
 }
