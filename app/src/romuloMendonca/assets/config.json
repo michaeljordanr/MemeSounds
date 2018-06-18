@@ -190,5 +190,59 @@
 		"audio_name": "ele_arrasou_ele_roubou_meu_coracao",
 		"audio_description": "Ele arrasou, ele roubou meu coração!",
 		"audio_thumb": ""
+	},
+	{
+		"id": 31,
+		"audio_name": "voce_e_muleke_voce_e_safado",
+		"audio_description": "Você é muleke! Você é safado!",
+		"audio_thumb": ""
+	},
+	{
+		"id": 32,
+		"audio_name": "vai_pra_saturo_jupiter_outra_galaxia",
+		"audio_description": "Vai pra Saturno, pra Jupiter, pra outra galáxia",
+		"audio_thumb": ""
+	},
+	{
+		"id": 33,
+		"audio_name": "shhh_a_que_jararaca_safada",
+		"audio_description": "shhhhh, que jararaca safada!",
+		"audio_thumb": ""
+	},
+	{
+		"id": 34,
+		"audio_name": "e_e_fatal_e_fataaaaal",
+		"audio_description": "e é fatal, é fataaaalll11!",
+		"audio_thumb": ""
+	},
+	{
+		"id": 35,
+		"audio_name": "ele_nao_tem_piedade",
+		"audio_description": "Ele não tem piedade",
+		"audio_thumb": ""
+	},
+	{
+		"id": 36,
+		"audio_name": "silenciador_ativado_bola_de_fogo",
+		"audio_description": "Silenciador ativado bola de fogo",
+		"audio_thumb": ""
+	},
+	{
+		"id": 37,
+		"audio_name": "caai_toda_dengosa",
+		"audio_description": "Caai toda dengosa!",
+		"audio_thumb": ""
+	},
+	{
+		"id": 38,
+		"audio_name": "convite_ao_prazer",
+		"audio_description": "Convite ao prazer",
+		"audio_thumb": ""
+	},
+	{
+		"id": 39,
+		"audio_name": "so_os_loucos",
+		"audio_description": "Só os loucos sabem",
+		"audio_thumb": ""
 	}
 ]
