@@ -10,18 +10,31 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.RecyclerViewHolder> {
+public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.RecyclerViewHolder> implements
+        Filterable{
+    private AudioFilter filter;
     private List<Audio> audioList;
+    private List<Audio> audioFilteredList;
     private Context context;
     private RecyclerAdapterOnClickListener callbackOnClick;
     private RecyclerAdapterOnLongListener callbackOnLongClick;
     private int lastPosition = -1;
+
+    @Override
+    public Filter getFilter() {
+        if(filter == null) {
+            filter = new AudioFilter(audioFilteredList, this);
+        }
+        return filter;
+    }
 
     public interface RecyclerAdapterOnClickListener{
         void onClick(Audio audio);
@@ -91,6 +104,7 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.RecyclerView
 
     public void setData(List<Audio> audioList){
         this.audioList = audioList;
+        this.audioFilteredList = audioList;
         notifyDataSetChanged();
     }
 

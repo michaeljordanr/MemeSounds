@@ -6,4 +6,6 @@
 
     <string name="request_explanation">"Permissão necessária para o compartilhamento de audio"</string>
     <string name="request_denied">Permissão não concedida. Não é possível compartilhar audios.</string>
+    <string name="search">Buscar</string>
+    <string name="search_hint">buscar...</string>
 </resources>
