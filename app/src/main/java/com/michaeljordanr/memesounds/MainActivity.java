@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements AudioAdapter.Recy
         AudioAdapter.RecyclerAdapterOnLongListener{
 
     private static final String uriAssetsProvider = "content://" + BuildConfig.APPLICATION_ID + "/";
+    private static final String JSON_CONFIG_PATH = "config.json";
 
     private RxAudioPlayer rxAudioPlayer;
     private AudioAdapter adapter;
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements AudioAdapter.Recy
             getSupportActionBar().setTitle(R.string.app_name);
         }
 
-        String jsonSource = Utils.loadJSONFromAsset(this,"config.json");
+        String jsonSource = Utils.loadJSONFromAsset(this,JSON_CONFIG_PATH);
         Type type = new TypeToken<List<Audio>>() {
         }.getType();
         List<Audio> audioList = new Gson().fromJson(jsonSource, type);
@@ -90,12 +91,6 @@ public class MainActivity extends AppCompatActivity implements AudioAdapter.Recy
                 return false;
             }
         });
-        searchView.setOnQueryTextFocusChangeListener((v, hasFocus) -> {
-            if(!hasFocus){
-                searchView.setIconified(true);
-            }
-        });
-
         return true;
     }
 

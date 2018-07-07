@@ -20,19 +20,9 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
-    <android.support.constraint.ConstraintLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
+
+    <include android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        layout="@layout/content_main"/>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_buttons"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="4dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </android.support.constraint.ConstraintLayout>
 </android.support.design.widget.CoordinatorLayout>
