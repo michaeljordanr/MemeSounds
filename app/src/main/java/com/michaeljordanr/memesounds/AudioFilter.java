@@ -41,6 +41,7 @@ public class AudioFilter extends Filter {
 
     @Override
     protected void publishResults(CharSequence constraint, FilterResults results) {
-        adapter.setData((List<Audio>)results.values);
+        List<Audio> filteredResult = (List<Audio>)results.values;
+        adapter.setData(filteredResult);
     }
 }
