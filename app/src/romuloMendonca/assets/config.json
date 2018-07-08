@@ -244,5 +244,47 @@
 		"audio_name": "so_os_loucos",
 		"audio_description": "Só os loucos sabem",
 		"audio_thumb": ""
+	},
+	{
+		"id": 40,
+		"audio_name": "pegadinha_malandro",
+		"audio_description": "Pedadinha do malandro",
+		"audio_thumb": ""
+	},
+	{
+		"id": 41,
+		"audio_name": "atropelaram_a_moca",
+		"audio_description": "Atropelaram a moça",
+		"audio_thumb": ""
+	},
+	{
+		"id": 42,
+		"audio_name": "touchdown",
+		"audio_description": "TOUCHDOWN!",
+		"audio_thumb": ""
+	},
+	{
+		"id": 43,
+		"audio_name": "opsss",
+		"audio_description": "OPSS!!!",
+		"audio_thumb": ""
+	},
+	{
+		"id": 44,
+		"audio_name": "brinquedo_assassino",
+		"audio_description": "O Brinquedo Assassino",
+		"audio_thumb": ""
+	},
+	{
+		"id": 45,
+		"audio_name": "diretaco",
+		"audio_description": "Diretaço!!!",
+		"audio_thumb": ""
+	},
+	{
+		"id": 46,
+		"audio_name": "o_amor_esta_no_ar",
+		"audio_description": "O amor está no ar",
+		"audio_thumb": ""
 	}
 ]
