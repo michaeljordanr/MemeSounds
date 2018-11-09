@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">Nome do app</string>
-    <string name="loading">Carregando</string>
-    <string name="loading_msg">Carregando audios…</string>
-    <string name="share_audio">Compartilhar</string>
+    <string name="loading">Loading</string>
+    <string name="loading_msg">Loading audios…</string>
+    <string name="share_audio">Share</string>
 
-    <string name="request_explanation">"Permissão necessária para o compartilhamento de audio"</string>
-    <string name="request_denied">Permissão não concedida. Não é possível compartilhar audios.</string>
-    <string name="search">Buscar</string>
-    <string name="search_hint">buscar...</string>
+    <string name="request_explanation">"Permission nedded for audio sharing"</string>
+    <string name="request_denied">Permission denied. It wasn\'t possible share the audio.</string>
+    <string name="search">Search</string>
+    <string name="search_hint">search…</string>
 </resources>

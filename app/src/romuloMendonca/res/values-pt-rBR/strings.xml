@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Rômulo Mendonça Bordões</string>
+
+    <string name="loading">Carregando</string>
+    <string name="loading_msg">Carregando audios…</string>
+    <string name="share_audio">Compartilhar</string>
+
+    <string name="request_explanation">"Permissão necessária para o compartilhamento de audio"</string>
+    <string name="request_denied">Permissão não concedida. Não é possível compartilhar audios.</string>
+    <string name="search">Buscar</string>
+    <string name="search_hint">buscar…</string>
+</resources>
