@@ -1,0 +1,188 @@
+[
+	{
+		"id": 0,
+		"audio_name": "eu_tomei_conhaque",
+		"audio_description": "Eu tomei conhaque",
+		"audio_thumb": ""
+	},
+	{
+		"id": 1,
+		"audio_name": "um_policial_mentiroso",
+		"audio_description": "Um policial mentiroso!",
+		"audio_thumb": ""
+	},
+	{
+		"id": 2,
+		"audio_name": "qual_tistimunha_ele_tem",
+		"audio_description": "Qual tistimunta ele tem?",
+		"audio_thumb": ""
+	},
+	{
+		"id": 3,
+		"audio_name": "ow_arruma_tistimunha_rapaz",
+		"audio_description": "Ow, arruma a tistimunha rapaz!",
+		"audio_thumb": ""
+	},
+	{
+		"id": 4,
+		"audio_name": "voce_ta_na_comparacao_errada_valdecir",
+		"audio_description": "Você tá na comparação errada, Valdecir.",
+		"audio_thumb": ""
+	},
+	{
+		"id": 5,
+		"audio_name": "mintiroso",
+		"audio_description": "MINTIROSO",
+		"audio_thumb": ""
+	},
+	{
+		"id": 6,
+		"audio_name": "desculpa",
+		"audio_description": "Desculpa",
+		"audio_thumb": ""
+	},
+	{
+		"id": 7,
+		"audio_name": "um_pouquinho_de_cheiro_de_alcool_sou",
+		"audio_description": "um pouqinho de cheiro de alccol",
+		"audio_thumb": ""
+	},
+	{
+		"id": 8,
+		"audio_name": "o_sr_ta_bem_sou",
+		"audio_description": "O senhor tá bem? -SOU",
+		"audio_thumb": ""
+	},
+	{
+		"id": 9,
+		"audio_name": "han_eu_vou_dancar_ne",
+		"audio_description": "han... Eu vou dançar né?",
+		"audio_thumb": ""
+	},
+	{
+		"id": 10,
+		"audio_name": "sou_alcoolatra_consciente",
+		"audio_description": "Sou alcoólatra consciente!",
+		"audio_thumb": ""
+	},
+	{
+		"id": 11,
+		"audio_name": "mas_vou_andar_a_pe",
+		"audio_description": "Mas vou andar a pé?",
+		"audio_thumb": ""
+	},
+	{
+		"id": 12,
+		"audio_name": "como_e_que_eu_vou_dar_aula",
+		"audio_description": "Como é que eu vou dar aula?",
+		"audio_thumb": ""
+	},
+	{
+		"id": 13,
+		"audio_name": "nao_dirijo_bebado",
+		"audio_description": "Não dirijo bêbado",
+		"audio_thumb": ""
+	},
+	{
+		"id": 14,
+		"audio_name": "ontem_que_eu_bebi",
+		"audio_description": "ONTEM QUE EU BEBI",
+		"audio_thumb": ""
+	},
+	{
+		"id": 15,
+		"audio_name": "justamente_ele_veio_trazer_a_parente_dele",
+		"audio_description": "Justamente ele, veio trazer a parente dele",
+		"audio_thumb": ""
+	},
+	{
+		"id": 16,
+		"audio_name": "tem_nada_a_ver_com_isso_ne",
+		"audio_description": "Tem nada a ver com isso né?",
+		"audio_thumb": ""
+	},
+	{
+		"id": 17,
+		"audio_name": "nao_nada_a_ve",
+		"audio_description": "Não, nada a ver",
+		"audio_thumb": ""
+	},
+	{
+		"id": 18,
+		"audio_name": "fala_com_a_gente_aqui_rapaz",
+		"audio_description": "fala com a gente aqui rapaz",
+		"audio_thumb": ""
+	},
+	{
+		"id": 19,
+		"audio_name": "dois_litros_de_coca_cola_seu_antonio",
+		"audio_description": "dois litros de coca cola seu antonio?",
+		"audio_thumb": ""
+	},
+	{
+		"id": 20,
+		"audio_name": "quero_ficar_livre_do_bafometro",
+		"audio_description": "quero ficar livre do bafômetro",
+		"audio_thumb": ""
+	},
+	{
+		"id": 21,
+		"audio_name": "ta_livre_to_fora",
+		"audio_description": "ta livre, tô fora",
+		"audio_thumb": ""
+	},
+	{
+		"id": 22,
+		"audio_name": "eu_sou_novo_pra_aprender",
+		"audio_description": "eu sou novo pra aprender",
+		"audio_thumb": ""
+	},
+	{
+		"id": 23,
+		"audio_name": "eu_vou_tentar_burla",
+		"audio_description": "eu vou tentar burlá",
+		"audio_thumb": ""
+	},
+	{
+		"id": 24,
+		"audio_name": "a_gente_pode_burla_a_lei",
+		"audio_description": "a gente pode burlar a lei",
+		"audio_thumb": ""
+	},
+	{
+		"id": 25,
+		"audio_name": "podi_podi_nao",
+		"audio_description": "Pode não",
+		"audio_thumb": ""
+	},
+	{
+		"id": 26,
+		"audio_name": "infelizmente",
+		"audio_description": "infelizmente...",
+		"audio_thumb": ""
+	},
+	{
+		"id": 27,
+		"audio_name": "risada",
+		"audio_description": "-risada-",
+		"audio_thumb": ""
+	},
+	{
+		"id": 28,
+		"audio_name": "eu_errei_errei_e_errei",
+		"audio_description": "eu errei, errei e errei",
+		"audio_thumb": ""
+	},
+	{
+		"id": 29,
+		"audio_name": "forca_na_peruca",
+		"audio_description": "força na peruca",
+		"audio_thumb": ""
+	},
+	{
+		"id": 30,
+		"audio_name": "caiu_ate_a_minha_dentadura",
+		"audio_description": "caiu até a minha dentadura",
+		"audio_thumb": ""
+	}
+]
