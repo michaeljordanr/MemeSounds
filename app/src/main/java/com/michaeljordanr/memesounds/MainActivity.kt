@@ -9,9 +9,9 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
 import android.support.v7.widget.Toolbar
 import android.view.Menu
-import butterknife.ButterKnife
 import com.github.piasy.rxandroidaudio.PlayConfig
 import com.github.piasy.rxandroidaudio.RxAudioPlayer
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import io.reactivex.Observer
@@ -23,11 +23,12 @@ class MainActivity : AppCompatActivity(), AudioAdapter.RecyclerAdapterOnClickLis
 
     private var rxAudioPlayer: RxAudioPlayer? = null
     private var adapter: AudioAdapter? = null
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        ButterKnife.bind(this)
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         if (supportActionBar != null) {
@@ -50,6 +51,7 @@ class MainActivity : AppCompatActivity(), AudioAdapter.RecyclerAdapterOnClickLis
         recyclerView.adapter = adapter
 
         rxAudioPlayer = RxAudioPlayer.getInstance()
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -70,6 +72,11 @@ class MainActivity : AppCompatActivity(), AudioAdapter.RecyclerAdapterOnClickLis
                 if (query == "") {
                     searchView.isIconified = true
                 }
+
+                val params = Bundle()
+                params.putString("query", query)
+                firebaseAnalytics.logEvent("filter", params)
+
                 return false
             }
         })
@@ -95,14 +102,19 @@ class MainActivity : AppCompatActivity(), AudioAdapter.RecyclerAdapterOnClickLis
         rxAudioPlayer!!.play(audioLoaded)
                 .subscribeOn(Schedulers.io())
                 .subscribe(object : Observer<Boolean> {
-                    override fun onSubscribe(disposable: Disposable) {}
-
-                    override fun onNext(aBoolean: Boolean?) {}
-
-                    override fun onError(throwable: Throwable) {}
-
                     override fun onComplete() {}
+
+                    override fun onSubscribe(d: Disposable) {}
+
+                    override fun onNext(t: Boolean) {}
+
+                    override fun onError(e: Throwable) {}
+
                 })
+
+        val params = Bundle()
+        params.putString("audio_name", audioName)
+        firebaseAnalytics.logEvent("play", params)
     }
 
     private fun shareAudio(audio: Audio) {
@@ -115,12 +127,15 @@ class MainActivity : AppCompatActivity(), AudioAdapter.RecyclerAdapterOnClickLis
                 resources.getString(R.string.share_audio)
                         + " \"" + audio.audioDescription + "\"")
         )
+
+        val params = Bundle()
+        params.putString("audio_name", audio.audioName)
+        firebaseAnalytics.logEvent("share_audio", params)
     }
 
     companion object {
-
-        private val uriAssetsProvider = "content://" + BuildConfig.APPLICATION_ID + "/"
-        private val JSON_CONFIG_PATH = "config.json"
+        private const val uriAssetsProvider = "content://" + BuildConfig.APPLICATION_ID + "/"
+        private const val JSON_CONFIG_PATH = "config.json"
     }
 
 }

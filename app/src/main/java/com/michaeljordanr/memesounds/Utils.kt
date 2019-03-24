@@ -8,7 +8,7 @@ import java.io.IOException
 import java.nio.charset.Charset
 
 object Utils {
-    var AUDIO_FORMAT = ".mp3"
+    const val AUDIO_FORMAT = ".mp3"
 
     fun getDrawableId(c: Context, imageName: String): Int {
         val packageName = c.applicationContext.packageName

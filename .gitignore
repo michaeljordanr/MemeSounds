@@ -7,3 +7,4 @@
 .externalNativeBuild
 *.jks
 /.idea
+*.ser
