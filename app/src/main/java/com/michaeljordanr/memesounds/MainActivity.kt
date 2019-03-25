@@ -8,22 +8,21 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
 import android.support.v7.widget.Toolbar
-import android.util.Log
 import android.view.Menu
-import android.widget.Toast
+import com.flurry.android.FlurryAgent
 import com.github.piasy.rxandroidaudio.PlayConfig
 import com.github.piasy.rxandroidaudio.RxAudioPlayer
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.microsoft.appcenter.analytics.Analytics
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 
-class MainActivity : AppCompatActivity(), AudioAdapter.RecyclerAdapterOnClickListener, AudioAdapter.RecyclerAdapterOnLongListener {
+class MainActivity : AppCompatActivity(), AudioAdapter.RecyclerAdapterOnClickListener,
+        AudioAdapter.RecyclerAdapterOnLongListener {
 
     private var rxAudioPlayer: RxAudioPlayer? = null
     private var adapter: AudioAdapter? = null
@@ -53,8 +52,13 @@ class MainActivity : AppCompatActivity(), AudioAdapter.RecyclerAdapterOnClickLis
         recyclerView.adapter = adapter
 
         rxAudioPlayer = RxAudioPlayer.getInstance()
+
+        val openAppEvent = "open_app"
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
-        firebaseAnalytics.logEvent("open_app", null)
+        firebaseAnalytics.logEvent(openAppEvent, null)
+
+        FlurryAgent.logEvent(openAppEvent)
+        Analytics.trackEvent(openAppEvent)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -77,8 +81,15 @@ class MainActivity : AppCompatActivity(), AudioAdapter.RecyclerAdapterOnClickLis
                 }
 
                 val params = Bundle()
+                val logFilter = "filter"
                 params.putString("query", query)
-                firebaseAnalytics.logEvent("filter", params)
+                firebaseAnalytics.logEvent(logFilter, params)
+
+                val logParams = HashMap<String, String>()
+                logParams["query"] = query
+
+                FlurryAgent.logEvent(logFilter, logParams)
+                Analytics.trackEvent(logFilter, logParams)
 
                 return false
             }
@@ -87,11 +98,33 @@ class MainActivity : AppCompatActivity(), AudioAdapter.RecyclerAdapterOnClickLis
     }
 
     override fun onClick(audio: Audio) {
-        play(audio.audioName)
+        val audioName = audio.audioName
+        play(audioName)
+
+        val params = Bundle()
+        val playLog = "play"
+        params.putString("audio_name", audioName)
+        firebaseAnalytics.logEvent(playLog, params)
+
+        val logParams = HashMap<String, String>()
+        logParams["audio_name"] = audioName
+        FlurryAgent.logEvent(playLog, logParams)
+        Analytics.trackEvent(playLog, logParams)
     }
 
     override fun onLongClick(audio: Audio) {
         shareAudio(audio)
+
+        val audioName = audio.audioName
+        val params = Bundle()
+        val shareAudioLog = "share_audio"
+        params.putString("audio_name", audioName)
+        firebaseAnalytics.logEvent(shareAudioLog, params)
+
+        val logParams = HashMap<String, String>()
+        logParams["audio_name"] = audioName
+        FlurryAgent.logEvent(shareAudioLog, logParams)
+        Analytics.trackEvent(shareAudioLog, logParams)
     }
 
     private fun play(audioName: String) {
@@ -114,10 +147,6 @@ class MainActivity : AppCompatActivity(), AudioAdapter.RecyclerAdapterOnClickLis
                     override fun onError(e: Throwable) {}
 
                 })
-
-        val params = Bundle()
-        params.putString("audio_name", audioName)
-        firebaseAnalytics.logEvent("play", params)
     }
 
     private fun shareAudio(audio: Audio) {
@@ -127,10 +156,6 @@ class MainActivity : AppCompatActivity(), AudioAdapter.RecyclerAdapterOnClickLis
         intent.putExtra(Intent.EXTRA_STREAM, uri)
         startActivity(Intent.createChooser(intent, resources.getString(R.string.share_audio)
                 + " \"${audio.audioDescription}\""))
-
-        val params = Bundle()
-        params.putString("audio_name", audio.audioName)
-        firebaseAnalytics.logEvent("share_audio", params)
     }
 
     companion object {

@@ -9,6 +9,8 @@ import java.nio.charset.Charset
 
 object Utils {
     const val AUDIO_FORMAT = ".mp3"
+    const val APP_CENTER_KEY = "6e27bac1-b9c7-48c1-aec1-8a08c6512fca"
+    const val FLURRY_KEY = "CC6FRJVJF7KS7FSM2RDP"
 
     fun getDrawableId(c: Context, imageName: String): Int {
         val packageName = c.applicationContext.packageName
