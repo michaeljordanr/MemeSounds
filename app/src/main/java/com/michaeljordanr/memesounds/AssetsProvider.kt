@@ -14,15 +14,15 @@ class AssetsProvider : ContentProvider() {
     @Throws(FileNotFoundException::class)
     override fun openAssetFile(uri: Uri, mode: String): AssetFileDescriptor? {
         val am = context!!.assets
-        val file_name = uri.lastPathSegment ?: throw FileNotFoundException()
+        val fileName = uri.lastPathSegment ?: throw FileNotFoundException()
         var afd: AssetFileDescriptor? = null
         try {
-            afd = am.openFd(file_name)
+            afd = am.openFd(fileName)
         } catch (e: IOException) {
             e.printStackTrace()
         }
 
-        return afd//super.openAssetFile(uri, mode);
+        return afd
     }
 
     override fun getType(p1: Uri): String? {
@@ -35,10 +35,6 @@ class AssetsProvider : ContentProvider() {
 
     override fun query(p1: Uri, p2: Array<String>?, p3: String?, p4: Array<String>?, p5: String?): Cursor? {
         return null
-    }
-
-    override fun query(uri: Uri, projection: Array<String>?, selection: String?, selectionArgs: Array<String>?, sortOrder: String?, cancellationSignal: CancellationSignal?): Cursor? {
-        return super.query(uri, projection, selection, selectionArgs, sortOrder, cancellationSignal)
     }
 
     override fun insert(p1: Uri, p2: ContentValues?): Uri? {

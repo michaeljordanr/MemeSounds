@@ -8,10 +8,14 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
 import android.support.v7.widget.Toolbar
+import android.util.Log
 import android.view.Menu
+import android.widget.Toast
 import com.github.piasy.rxandroidaudio.PlayConfig
 import com.github.piasy.rxandroidaudio.RxAudioPlayer
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import io.reactivex.Observer
@@ -36,9 +40,7 @@ class MainActivity : AppCompatActivity(), AudioAdapter.RecyclerAdapterOnClickLis
         }
 
         val jsonSource = Utils.loadJSONFromAsset(this, JSON_CONFIG_PATH)
-        val type = object : TypeToken<List<Audio>>() {
-
-        }.type
+        val type = object : TypeToken<List<Audio>>() {}.type
         val audioList = Gson().fromJson<List<Audio>>(jsonSource, type)
 
         adapter = AudioAdapter(this, this, this)
@@ -52,6 +54,7 @@ class MainActivity : AppCompatActivity(), AudioAdapter.RecyclerAdapterOnClickLis
 
         rxAudioPlayer = RxAudioPlayer.getInstance()
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
+        firebaseAnalytics.logEvent("open_app", null)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -122,11 +125,8 @@ class MainActivity : AppCompatActivity(), AudioAdapter.RecyclerAdapterOnClickLis
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "audio/*"
         intent.putExtra(Intent.EXTRA_STREAM, uri)
-        startActivity(Intent.createChooser(
-                intent,
-                resources.getString(R.string.share_audio)
-                        + " \"" + audio.audioDescription + "\"")
-        )
+        startActivity(Intent.createChooser(intent, resources.getString(R.string.share_audio)
+                + " \"${audio.audioDescription}\""))
 
         val params = Bundle()
         params.putString("audio_name", audio.audioName)
@@ -134,7 +134,7 @@ class MainActivity : AppCompatActivity(), AudioAdapter.RecyclerAdapterOnClickLis
     }
 
     companion object {
-        private const val uriAssetsProvider = "content://" + BuildConfig.APPLICATION_ID + "/"
+        private const val uriAssetsProvider = "content://${BuildConfig.APPLICATION_ID}/"
         private const val JSON_CONFIG_PATH = "config.json"
     }
 
