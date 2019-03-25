@@ -27,6 +27,11 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     flavorDimensions 'tier'
     productFlavors {
         negaoDeRosa {
@@ -38,7 +43,7 @@ android {
         romuloMendonca {
             applicationId = 'com.michaeljordanr.memesounds.romulomendonca'
             signingConfig signingConfigs.config
-            versionCode 6
+            versionCode 8
             versionName "1.4.1"
         }
         seuAntonio {
