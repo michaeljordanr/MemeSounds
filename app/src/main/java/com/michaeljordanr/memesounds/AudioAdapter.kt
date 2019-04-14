@@ -10,7 +10,7 @@ import android.widget.Button
 import android.widget.Filter
 import android.widget.Filterable
 
-class AudioAdapter(private var context: Context?, private val callbackOnClick: RecyclerAdapterOnClickListener,
+class AudioAdapter(private var context: Context, private val callbackOnClick: RecyclerAdapterOnClickListener,
                    private val callbackOnLongClick: RecyclerAdapterOnLongListener) : RecyclerView.Adapter<AudioAdapter.RecyclerViewHolder>(), Filterable {
     private var filter: AudioFilter? = null
     private var audioList: List<Audio>? = null
@@ -46,8 +46,8 @@ class AudioAdapter(private var context: Context?, private val callbackOnClick: R
 
         holder.audioButton.tag = audio.audioName
 
-        if (!audio.audioThumb.isEmpty()) {
-            holder.audioButton.setBackgroundResource(Utils.getDrawableId(context!!, audio.audioThumb))
+        if (audio.audioThumb.isNotEmpty()) {
+            holder.audioButton.setBackgroundResource(Utils.getDrawableId(context, audio.audioThumb))
 
         } else {
             holder.audioButton.text = audio.audioDescription

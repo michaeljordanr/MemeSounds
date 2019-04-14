@@ -1,13 +1,12 @@
 package com.michaeljordanr.memesounds
 
 import android.widget.Filter
-import java.util.*
 
 class AudioFilter(private val filterAudioList: List<Audio>, private val adapter: AudioAdapter) : Filter() {
 
-    override fun performFiltering(constraint: CharSequence?): Filter.FilterResults {
+    override fun performFiltering(constraint: CharSequence?): FilterResults {
         var query = constraint
-        val results = Filter.FilterResults()
+        val results = FilterResults()
 
         if (query != null && query.isNotEmpty()) {
             query = query.toString().toLowerCase()
@@ -29,7 +28,7 @@ class AudioFilter(private val filterAudioList: List<Audio>, private val adapter:
         return results
     }
 
-    override fun publishResults(constraint: CharSequence, results: Filter.FilterResults) {
-        adapter.setData(results.values as ArrayList<Audio>)
+    override fun publishResults(constraint: CharSequence, results: FilterResults) {
+        adapter.setData((results.values as List<*>).filterIsInstance<Audio>())
     }
 }
