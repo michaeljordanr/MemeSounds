@@ -1,11 +1,17 @@
 package com.michaeljordanr.memesounds
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.support.v4.content.FileProvider
+import android.widget.Toast
 import org.apache.commons.io.IOUtils
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
+import java.io.InputStream
 import java.nio.charset.Charset
+
 
 object Utils {
     const val AUDIO_FORMAT = ".mp3"
@@ -60,5 +66,34 @@ object Utils {
 
         return json
 
+    }
+
+    fun shareAudio(context: Context, audio: Audio) {
+        try {
+            val audioName = audio.audioName.removeSuffix(AUDIO_FORMAT)
+            val tmpFile = File(context.cacheDir.toString() + "/$audioName + $AUDIO_FORMAT")
+            val id: Int = context.resources.getIdentifier(audioName.removeSuffix(AUDIO_FORMAT), "raw", context.packageName)
+            val `in`: InputStream = context.resources.openRawResource(id)
+            val out = FileOutputStream(tmpFile, false)
+            val buff = ByteArray(1024)
+            var read: Int
+            try {
+                while (`in`.read(buff).also { read = it } > 0) {
+                    out.write(buff, 0, read)
+                }
+            } finally {
+                `in`.close()
+                out.close()
+            }
+            val uri: Uri = FileProvider.getUriForFile(context, "${BuildConfig.APPLICATION_ID}.fileprovider", tmpFile.absoluteFile)
+            val share = Intent(Intent.ACTION_SEND)
+            share.type = "audio/mpeg3"
+            share.putExtra(Intent.EXTRA_STREAM, uri)
+            val intent = Intent.createChooser(share, audio.audioDescription)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            context.startActivity(intent)
+        } catch (e: Exception) {
+            Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show()
+        }
     }
 }

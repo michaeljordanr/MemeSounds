@@ -1,6 +1,5 @@
 package com.michaeljordanr.memesounds
 
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -151,11 +150,15 @@ class MainActivity : AppCompatActivity(), AudioAdapter.RecyclerAdapterOnClickLis
 
     private fun shareAudio(audio: Audio) {
         val uri = Uri.parse(uriAssetsProvider + audio.audioName + Utils.AUDIO_FORMAT)
-        val intent = Intent(Intent.ACTION_SEND)
-        intent.type = "audio/*"
-        intent.putExtra(Intent.EXTRA_STREAM, uri)
-        startActivity(Intent.createChooser(intent, resources.getString(R.string.share_audio)
-                + " \"${audio.audioDescription}\""))
+
+
+        Utils.shareAudio(baseContext, audio)
+
+//        val intent = Intent(Intent.ACTION_SEND)
+//        intent.type = "audio/*"
+//        intent.putExtra(Intent.EXTRA_STREAM, uri)
+//        startActivity(Intent.createChooser(intent, resources.getString(R.string.share_audio)
+//                + " \"${audio.audioDescription}\""))
     }
 
     companion object {
