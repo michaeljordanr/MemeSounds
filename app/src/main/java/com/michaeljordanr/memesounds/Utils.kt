@@ -1,8 +1,10 @@
 package com.michaeljordanr.memesounds
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.content.FileProvider
 import org.apache.commons.io.IOUtils
@@ -25,7 +27,7 @@ object Utils {
 
     fun getFileAudio(c: Context, audio: String): File? {
         try {
-            val id: Int = c.resources.getIdentifier(audio.removeSuffix(AUDIO_FORMAT), "raw", c.packageName)
+            val id = getAudioIdFromRaw(c, audio)
             val `in`: InputStream = c.resources.openRawResource(id)
             val tempFile = File.createTempFile(audio, AUDIO_FORMAT)
             tempFile.deleteOnExit()
@@ -72,7 +74,7 @@ object Utils {
         try {
             val audioName = audio.audioName.removeSuffix(AUDIO_FORMAT)
             val tmpFile = File(context.cacheDir.toString() + "/$audioName + $AUDIO_FORMAT")
-            val id: Int = context.resources.getIdentifier(audioName.removeSuffix(AUDIO_FORMAT), "raw", context.packageName)
+            val id = getAudioIdFromRaw(context, audioName)
             val `in`: InputStream = context.resources.openRawResource(id)
             val out = FileOutputStream(tmpFile, false)
             val buff = ByteArray(1024)
@@ -96,4 +98,18 @@ object Utils {
             Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show()
         }
     }
+
+    fun getAudioIdFromRaw(context: Context, audioName: String): Int {
+        return context.resources.getIdentifier(audioName.removeSuffix(AUDIO_FORMAT), "raw", context.packageName)
+    }
+
+    fun hideKeyboard(activity: Activity) {
+        val view = activity.currentFocus
+        view?.let {
+            val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+    }
+
+
 }

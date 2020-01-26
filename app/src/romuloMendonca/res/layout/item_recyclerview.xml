@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/ripple"
-            android:backgroundTint="#ff5252"
+            android:backgroundTint="@color/colorPrimary"
             android:elevation="6dp"
             android:gravity="center"
             android:padding="4dp"

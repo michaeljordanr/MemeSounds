@@ -364,5 +364,83 @@
 		"audio_name": "grita_o_que_homem_ai",
 		"audio_description": "Grita Que Homem aí",
 		"audio_thumb": ""
+	},
+	{
+		"id": 60,
+		"audio_name": "toca_raul",
+		"audio_description": "Toca Raul!",
+		"audio_thumb": ""
+	},
+	{
+		"id": 61,
+		"audio_name": "sensualizando",
+		"audio_description": "Sensualizando",
+		"audio_thumb": ""
+	},
+	{
+		"id": 62,
+		"audio_name": "sedutora_da_noite",
+		"audio_description": "Sedutora da noite",
+		"audio_thumb": ""
+	},
+	{
+		"id": 63,
+		"audio_name": "feito_de_trouxa_",
+		"audio_description": "Feito de trouxa",
+		"audio_thumb": ""
+	},
+	{
+		"id": 64,
+		"audio_name": "modo_aviao",
+		"audio_description": "Modo avião",
+		"audio_thumb": ""
+	},
+	{
+		"id": 65,
+		"audio_name": "miraculoso_chama_vaticano",
+		"audio_description": "Miraculoso, chama o Vaticano",
+		"audio_thumb": ""
+	},
+	{
+		"id": 66,
+		"audio_name": "naaaooo",
+		"audio_description": "Nãããooo",
+		"audio_thumb": ""
+	},
+	{
+		"id": 67,
+		"audio_name": "que_indelicado_serjao",
+		"audio_description": "Que indelicado, Serjão",
+		"audio_thumb": ""
+	},
+	{
+		"id": 68,
+		"audio_name": "guloso",
+		"audio_description": "Guloso",
+		"audio_thumb": ""
+	},
+	{
+		"id": 69,
+		"audio_name": "wilson",
+		"audio_description": "Wilson",
+		"audio_thumb": ""
+	},
+	{
+		"id": 70,
+		"audio_name": "ney_latorraca",
+		"audio_description": "Ney Latorraca",
+		"audio_thumb": ""
+	},
+	{
+		"id": 71,
+		"audio_name": "abusado_asanhado",
+		"audio_description": "Abusado, assanhado",
+		"audio_thumb": ""
+	},
+	{
+		"id": 72,
+		"audio_name": "assustador",
+		"audio_description": "Assustador!",
+		"audio_thumb": ""
 	}
 ]

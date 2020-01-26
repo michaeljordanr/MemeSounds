@@ -1,31 +1,29 @@
 package com.michaeljordanr.memesounds
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.flurry.android.FlurryAgent
-import com.github.piasy.rxandroidaudio.PlayConfig
-import com.github.piasy.rxandroidaudio.RxAudioPlayer
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.microsoft.appcenter.analytics.Analytics
-import io.reactivex.Observer
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 
 
-class MainActivity : AppCompatActivity(), AudioAdapter.RecyclerAdapterOnClickListener,
-        AudioAdapter.RecyclerAdapterOnLongListener {
+class MainActivity : AppCompatActivity(), AudioListFragment.AudioListFragmentListener {
 
-    private var rxAudioPlayer: RxAudioPlayer? = null
-    private var adapter: AudioAdapter? = null
+    var selectedTab = AudioListFragment.AudioListType.ALL
     private lateinit var firebaseAnalytics: FirebaseAnalytics
+
+    lateinit var viewPager: ViewPager2
+    lateinit var tabs: TabLayout
+
+    private val viewPagerAdapter by lazy {
+        ViewPagerAdapter(this)
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,20 +35,33 @@ class MainActivity : AppCompatActivity(), AudioAdapter.RecyclerAdapterOnClickLis
             supportActionBar!!.setTitle(R.string.app_name)
         }
 
-        val jsonSource = Utils.loadJSONFromAsset(this, JSON_CONFIG_PATH)
-        val type = object : TypeToken<List<Audio>>() {}.type
-        val audioList = Gson().fromJson<List<Audio>>(jsonSource, type)
+        viewPager = findViewById(R.id.view_pager)
+        tabs = findViewById(R.id.tab_layout)
 
-        adapter = AudioAdapter(this, this, this)
-        adapter!!.setData(audioList)
+        viewPager.adapter = viewPagerAdapter
 
-        val layoutManager = GridLayoutManager(this, 3)
-        val recyclerView = findViewById<RecyclerView>(R.id.rv_buttons)
-        recyclerView.layoutManager = layoutManager
-        recyclerView.setHasFixedSize(true)
-        recyclerView.adapter = adapter
+        TabLayoutMediator(tabs, viewPager,
+                TabLayoutMediator.TabConfigurationStrategy { tab, position ->
+                    when (position) {
+                        0 -> {
+                            tab.text = getString(R.string.all)
+                        }
+                        1 -> {
+                            tab.text = getString(R.string.bookmarks)
+                        }
+                    }
+                }).attach()
 
-        rxAudioPlayer = RxAudioPlayer.getInstance()
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                selectedTab = if (position == AudioListFragment.AudioListType.FAVORITES.value) {
+                    AudioListFragment.AudioListType.FAVORITES
+                } else {
+                    AudioListFragment.AudioListType.ALL
+                }
+            }
+        })
 
         val openAppEvent = "open_app"
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
@@ -74,10 +85,13 @@ class MainActivity : AppCompatActivity(), AudioAdapter.RecyclerAdapterOnClickLis
             }
 
             override fun onQueryTextChange(query: String): Boolean {
-                adapter!!.filter.filter(query)
-                if (query == "") {
-                    searchView.isIconified = true
-                }
+                viewPagerAdapter.setQuery(query)
+                viewPager.adapter = viewPagerAdapter
+
+//                if (query == "") {
+//                    searchView.isIconified = true
+//                    Utils.hideKeyboard(this@MainActivity)
+//                }
 
                 val params = Bundle()
                 val logFilter = "filter"
@@ -96,74 +110,16 @@ class MainActivity : AppCompatActivity(), AudioAdapter.RecyclerAdapterOnClickLis
         return true
     }
 
-    override fun onClick(audio: Audio) {
-        val audioName = audio.audioName
-        play(audioName)
-
-        val params = Bundle()
-        val playLog = "play"
-        params.putString("audio_name", audioName)
-        firebaseAnalytics.logEvent(playLog, params)
-
-        val logParams = HashMap<String, String>()
-        logParams["audio_name"] = audioName
-        FlurryAgent.logEvent(playLog, logParams)
-        Analytics.trackEvent(playLog, logParams)
-    }
-
-    override fun onLongClick(audio: Audio) {
-        shareAudio(audio)
-
-        val audioName = audio.audioName
-        val params = Bundle()
-        val shareAudioLog = "share_audio"
-        params.putString("audio_name", audioName)
-        firebaseAnalytics.logEvent(shareAudioLog, params)
-
-        val logParams = HashMap<String, String>()
-        logParams["audio_name"] = audioName
-        FlurryAgent.logEvent(shareAudioLog, logParams)
-        Analytics.trackEvent(shareAudioLog, logParams)
-    }
-
-    private fun play(audioName: String) {
-        val audioLoaded = PlayConfig.file(Utils.getFileAudio(this, audioName))
-                //PlayConfig.res(getApplicationContext(), resourceId) // or play a raw resource
-                .looping(false) // loop or not
-                .leftVolume(1.0f) // left volume
-                .rightVolume(1.0f) // right volume
-                .build() // build this config and play!
-
-        rxAudioPlayer!!.play(audioLoaded)
-                .subscribeOn(Schedulers.io())
-                .subscribe(object : Observer<Boolean> {
-                    override fun onComplete() {}
-
-                    override fun onSubscribe(d: Disposable) {}
-
-                    override fun onNext(t: Boolean) {}
-
-                    override fun onError(e: Throwable) {}
-
-                })
-    }
-
-    private fun shareAudio(audio: Audio) {
-        val uri = Uri.parse(uriAssetsProvider + audio.audioName + Utils.AUDIO_FORMAT)
-
-
-        Utils.shareAudio(baseContext, audio)
-
-//        val intent = Intent(Intent.ACTION_SEND)
-//        intent.type = "audio/*"
-//        intent.putExtra(Intent.EXTRA_STREAM, uri)
-//        startActivity(Intent.createChooser(intent, resources.getString(R.string.share_audio)
-//                + " \"${audio.audioDescription}\""))
-    }
-
     companion object {
-        private const val uriAssetsProvider = "content://${BuildConfig.APPLICATION_ID}/"
-        private const val JSON_CONFIG_PATH = "config.json"
+        const val JSON_CONFIG_PATH = "config.json"
     }
 
+    override fun goToPage(audioListType: AudioListFragment.AudioListType) {
+        if (audioListType == AudioListFragment.AudioListType.FAVORITES) {
+            viewPager.currentItem = 1
+        } else {
+            viewPager.currentItem = 0
+        }
+        viewPager.adapter = viewPagerAdapter
+    }
 }

@@ -27,8 +27,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val channelId = "Default"
         val builder = NotificationCompat.Builder(this, channelId)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle(remoteMessage?.notification?.title)
-                .setContentText(remoteMessage?.notification?.body).setAutoCancel(true)
+                .setContentTitle(remoteMessage.notification?.title)
+                .setContentText(remoteMessage.notification?.body).setAutoCancel(true)
                 .setContentIntent(pendingIntent)
         val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

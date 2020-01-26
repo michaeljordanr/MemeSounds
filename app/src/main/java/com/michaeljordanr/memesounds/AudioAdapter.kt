@@ -42,19 +42,20 @@ class AudioAdapter(private var context: Context, private val callbackOnClick: Re
     }
 
     override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
-        val audio = audioList!![position]
+        audioList?.let {
+            val audio = it[position]
 
-        holder.audioButton.tag = audio.audioName
+            holder.audioButton.tag = audio.audioName
 
-        if (audio.audioThumb.isNotEmpty()) {
-            holder.audioButton.setBackgroundResource(Utils.getDrawableId(context, audio.audioThumb))
+            if (audio.audioThumb.isNotEmpty()) {
+                holder.audioButton.setBackgroundResource(Utils.getDrawableId(context, audio.audioThumb))
 
-        } else {
-            holder.audioButton.text = audio.audioDescription
+            } else {
+                holder.audioButton.text = audio.audioDescription
+            }
+
+            setAnimation(holder.itemView, position)
         }
-
-        setAnimation(holder.itemView, position)
-
     }
 
     private fun setAnimation(viewToAnimate: View, position: Int) {
@@ -76,8 +77,8 @@ class AudioAdapter(private var context: Context, private val callbackOnClick: Re
     }
 
     fun setData(audioList: List<Audio>) {
-        this.audioList = audioList
-        this.audioFilteredList = audioList
+        this.audioList = audioList.sortedByDescending { it.id }
+        this.audioFilteredList = audioList.sortedByDescending { it.id }
         notifyDataSetChanged()
     }
 

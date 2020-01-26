@@ -10,4 +10,9 @@
     <string name="request_denied">Permissão não concedida. Não é possível compartilhar audios.</string>
     <string name="search">Buscar</string>
     <string name="search_hint">buscar…</string>
+
+    <string name="bookmark">Favoritar</string>
+    <string name="bookmarks">Favoritos</string>
+    <string name="unbookmark">Desfavoritar</string>
+    <string name="all">Todos</string>
 </resources>

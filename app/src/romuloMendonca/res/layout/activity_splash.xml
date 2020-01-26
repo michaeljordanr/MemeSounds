@@ -13,7 +13,7 @@
         android:layout_gravity="center"
         android:background="@android:color/white"
         android:scaleType="centerCrop"
-        android:src="@drawable/romulo_mendonca" />
+        android:src="@drawable/romulo_genio" />
 
     <View
         android:id="@+id/statusBarBackground"
