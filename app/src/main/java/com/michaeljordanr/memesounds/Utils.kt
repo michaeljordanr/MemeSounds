@@ -3,8 +3,8 @@ package com.michaeljordanr.memesounds
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.support.v4.content.FileProvider
 import android.widget.Toast
+import androidx.core.content.FileProvider
 import org.apache.commons.io.IOUtils
 import java.io.File
 import java.io.FileOutputStream
@@ -25,8 +25,8 @@ object Utils {
 
     fun getFileAudio(c: Context, audio: String): File? {
         try {
-            val am = c.assets
-            val `in` = am.open(audio + AUDIO_FORMAT)
+            val id: Int = c.resources.getIdentifier(audio.removeSuffix(AUDIO_FORMAT), "raw", c.packageName)
+            val `in`: InputStream = c.resources.openRawResource(id)
             val tempFile = File.createTempFile(audio, AUDIO_FORMAT)
             tempFile.deleteOnExit()
             val out = FileOutputStream(tempFile)

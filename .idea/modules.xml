@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/StudioProjects-memesounds.iml" filepath="$PROJECT_DIR$/StudioProjects-memesounds.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/StudioProjects-memesounds-app.iml" filepath="$PROJECT_DIR$/app/StudioProjects-memesounds-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/android_projects-memesounds.iml" filepath="$PROJECT_DIR$/android_projects-memesounds.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/memesounds.iml" filepath="$PROJECT_DIR$/memesounds.iml" />

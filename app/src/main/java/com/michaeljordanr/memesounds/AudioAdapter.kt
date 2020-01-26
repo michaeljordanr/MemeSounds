@@ -1,7 +1,6 @@
 package com.michaeljordanr.memesounds
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +8,7 @@ import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.Filter
 import android.widget.Filterable
+import androidx.recyclerview.widget.RecyclerView
 
 class AudioAdapter(private var context: Context, private val callbackOnClick: RecyclerAdapterOnClickListener,
                    private val callbackOnLongClick: RecyclerAdapterOnLongListener) : RecyclerView.Adapter<AudioAdapter.RecyclerViewHolder>(), Filterable {
