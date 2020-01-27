@@ -1,13 +1,14 @@
 package com.michaeljordanr.memesounds
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 data class Audio(
+        @field:Json(name = "audio_id")
         var id: Int,
-        @SerializedName("audio_name")
+        @field:Json(name = "audio_name")
         var audioName: String,
-        @SerializedName("audio_description")
+        @field:Json(name = "audio_description")
         var audioDescription: String,
-        @SerializedName("audio_thumb")
+        @field:Json(name = "audio_thumb")
         var audioThumb: String
 )

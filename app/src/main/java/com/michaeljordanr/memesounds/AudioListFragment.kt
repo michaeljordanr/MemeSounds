@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
 import android.os.Parcelable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,9 +17,10 @@ import com.flurry.android.FlurryAgent
 import com.github.piasy.rxandroidaudio.PlayConfig
 import com.github.piasy.rxandroidaudio.RxAudioPlayer
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.microsoft.appcenter.analytics.Analytics
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -34,6 +36,10 @@ class AudioListFragment : Fragment(), AudioAdapter.RecyclerAdapterOnClickListene
     private lateinit var activityListener: AudioListFragmentListener
 
     private val bottomSheetFragment by lazy { BottomSheetFragment(this) }
+    private val moshi by lazy { Moshi.Builder().build() }
+    private val typeData by lazy {  Types.newParameterizedType(List::class.java, Audio::class.java)}
+
+    lateinit var jsonAdapter: JsonAdapter<List<Audio>>
 
     @Parcelize
     enum class AudioListType(val value: Int) : Parcelable {
@@ -73,8 +79,11 @@ class AudioListFragment : Fragment(), AudioAdapter.RecyclerAdapterOnClickListene
     @SuppressLint("DefaultLocale")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        jsonAdapter = moshi.adapter(typeData)
+
         context?.let {
             var audioList = getAudioList()
+
             arguments?.let { bundle ->
                 val filterType = bundle.getParcelable<AudioListType>(AUDIO_LIST_TYPE)
                 val query = bundle.getString(AUDIO_LIST_QUERY) ?: ""
@@ -113,9 +122,9 @@ class AudioListFragment : Fragment(), AudioAdapter.RecyclerAdapterOnClickListene
     }
 
     private fun getAudioList(): List<Audio> {
-        val jsonSource = Utils.loadJSONFromAsset(baseContext, MainActivity.JSON_CONFIG_PATH)
-        val type = object : TypeToken<List<Audio>>() {}.type
-        return Gson().fromJson<List<Audio>>(jsonSource, type)
+        val jsonString = Utils.loadJSONFromAsset(baseContext, MainActivity.JSON_CONFIG_PATH)
+
+        return jsonAdapter.fromJson(jsonString.toString()) ?: listOf()
     }
 
     override fun onClick(audio: Audio) {
@@ -172,10 +181,8 @@ class AudioListFragment : Fragment(), AudioAdapter.RecyclerAdapterOnClickListene
 
     private fun getBookmarks(): ArrayList<Audio> {
         sharedPreferencesObj()?.let { prefs ->
-            return Gson().fromJson(
-                    prefs.getString(BOOKMARKS_AUDIO_KEY, "") ?: "",
-                    object : TypeToken<ArrayList<Audio>>() {}.type
-            ) ?: arrayListOf()
+            val jsonString = prefs.getString(BOOKMARKS_AUDIO_KEY, "") ?: ""
+            return ArrayList(jsonAdapter.fromJson(jsonString) ?: listOf())
         } ?: kotlin.run {
             return arrayListOf()
         }
@@ -188,11 +195,12 @@ class AudioListFragment : Fragment(), AudioAdapter.RecyclerAdapterOnClickListene
     }
 
     override fun unbookmark(id: Int) {
+        Log.d("teste", "TESTE $id")
         sharedPreferencesObj()?.let { prefs ->
             val editor = prefs.edit()
             var bookmarks = getBookmarks()
             bookmarks = ArrayList(bookmarks.filter { audio -> audio.id != id })
-            editor.putString(BOOKMARKS_AUDIO_KEY, Gson().toJson(bookmarks))
+            editor.putString(BOOKMARKS_AUDIO_KEY, jsonAdapter.toJson(bookmarks))
             editor.apply()
 
             adapter?.setData(getBookmarks())
@@ -200,11 +208,12 @@ class AudioListFragment : Fragment(), AudioAdapter.RecyclerAdapterOnClickListene
     }
 
     override fun bookmark(audio: Audio) {
+        Log.d("teste", "TESTE ${audio.id}")
         sharedPreferencesObj()?.let { prefs ->
             val editor = prefs.edit()
             val bookmarks = getBookmarks()
             bookmarks.add(audio)
-            editor.putString(BOOKMARKS_AUDIO_KEY, Gson().toJson(bookmarks))
+            editor.putString(BOOKMARKS_AUDIO_KEY, jsonAdapter.toJson(bookmarks))
             editor.apply()
 
             Handler().postDelayed({

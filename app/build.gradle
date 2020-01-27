@@ -45,7 +45,7 @@ android {
         romuloMendonca {
             applicationId = 'com.michaeljordanr.memesounds.romulomendonca'
             signingConfig signingConfigs.config
-            versionCode 14
+            versionCode 15
             versionName "2.0.0"
         }
         seuAntonio {
@@ -71,7 +71,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.1.0'
     implementation 'com.google.android.material:material:1.2.0-alpha04'
 
-    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation "com.squareup.retrofit2:converter-moshi:2.6.1"
     implementation 'com.github.piasy:rxandroidaudio:1.6.0'
     implementation 'com.github.piasy:AudioProcessor:1.6.0'
     implementation 'org.apache.commons:commons-io:1.3.2'
