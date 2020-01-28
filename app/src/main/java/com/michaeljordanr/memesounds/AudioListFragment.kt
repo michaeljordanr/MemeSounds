@@ -37,7 +37,7 @@ class AudioListFragment : Fragment(), AudioAdapter.RecyclerAdapterOnClickListene
 
     private val bottomSheetFragment by lazy { BottomSheetFragment(this) }
     private val moshi by lazy { Moshi.Builder().build() }
-    private val typeData by lazy {  Types.newParameterizedType(List::class.java, Audio::class.java)}
+    private val typeData by lazy { Types.newParameterizedType(List::class.java, Audio::class.java) }
 
     lateinit var jsonAdapter: JsonAdapter<List<Audio>>
 
@@ -176,13 +176,17 @@ class AudioListFragment : Fragment(), AudioAdapter.RecyclerAdapterOnClickListene
     }
 
     private fun sharedPreferencesObj(): SharedPreferences? {
-        return context?.getSharedPreferences("MEMESOUNDS_SHARED_PREFERENCES", Context.MODE_PRIVATE)
+        return context?.getSharedPreferences("SHARED_PREFERENCES", Context.MODE_PRIVATE)
     }
 
     private fun getBookmarks(): ArrayList<Audio> {
         sharedPreferencesObj()?.let { prefs ->
             val jsonString = prefs.getString(BOOKMARKS_AUDIO_KEY, "") ?: ""
-            return ArrayList(jsonAdapter.fromJson(jsonString) ?: listOf())
+            return if (jsonString.isNotEmpty()) {
+                ArrayList(jsonAdapter.fromJson(jsonString) ?: listOf())
+            } else {
+                arrayListOf()
+            }
         } ?: kotlin.run {
             return arrayListOf()
         }
