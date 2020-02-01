@@ -442,5 +442,119 @@
 		"audio_name": "assustador",
 		"audio_description": "Assustador!",
 		"audio_thumb": ""
+	},
+		{
+		"audio_id": 73,
+		"audio_name": "ahhhh",
+		"audio_description": "Ahhh!",
+		"audio_thumb": ""
+	},
+		{
+		"audio_id": 74,
+		"audio_name": "ta_o_incendiario",
+		"audio_description": "Tá o incendiário",
+		"audio_thumb": ""
+	},
+		{
+		"audio_id": 75,
+		"audio_name": "o_dragao_barbudo",
+		"audio_description": "O dragão barbudo",
+		"audio_thumb": ""
+	},
+		{
+		"audio_id": 76,
+		"audio_name": "nao_naaaooo",
+		"audio_description": "Não, naaaooo!",
+		"audio_thumb": ""
+	},
+		{
+		"audio_id": 77,
+		"audio_name": "vai_ficar_louco",
+		"audio_description": "Vai ficar louco",
+		"audio_thumb": ""
+	},
+		{
+		"audio_id": 78,
+		"audio_name": "oto_patama",
+		"audio_description": "Oto patamá",
+		"audio_thumb": ""
+	},
+		{
+		"audio_id": 79,
+		"audio_name": "acabou_a_mamata",
+		"audio_description": "Acabou a mamata",
+		"audio_thumb": ""
+	},
+		{
+		"audio_id": 80,
+		"audio_name": "aqui_nao",
+		"audio_description": "Aqui não",
+		"audio_thumb": ""
+	},
+		{
+		"audio_id": 81,
+		"audio_name": "lanso_a_braba",
+		"audio_description": "Lanso a braba",
+		"audio_thumb": ""
+	},
+		{
+		"audio_id": 82,
+		"audio_name": "eis_o_despota",
+		"audio_description": "Eis o déspota!",
+		"audio_thumb": ""
+	},
+		{
+		"audio_id": 83,
+		"audio_name": "teve_fight_de_bumbum",
+		"audio_description": "Teve um fight de bumbum",
+		"audio_thumb": ""
+	},
+		{
+		"audio_id": 84,
+		"audio_name": "ze_pequeno_impiedoso",
+		"audio_description": "Zé pequeno impiedoso!",
+		"audio_thumb": ""
+	},
+		{
+		"audio_id": 85,
+		"audio_name": "que_audacia",
+		"audio_description": "Que audácia",
+		"audio_thumb": ""
+	},
+		{
+		"audio_id": 86,
+		"audio_name": "papaaaiii",
+		"audio_description": "Papaaaiii",
+		"audio_thumb": ""
+	},
+		{
+		"audio_id": 87,
+		"audio_name": "ai_vem_o_desespero",
+		"audio_description": "Aí vem o desespero",
+		"audio_thumb": ""
+	},
+		{
+		"audio_id": 88,
+		"audio_name": "eee_veeemm",
+		"audio_description": "eee veeemm",
+		"audio_thumb": ""
+	},
+		{
+		"audio_id": 89,
+		"audio_name": "que_ta_acontecendo_ai",
+		"audio_description": "Que tá acontecendo aí?",
+		"audio_thumb": ""
+	},
+		{
+		"audio_id": 90,
+		"audio_name": "eu_vi_um_bumbum",
+		"audio_description": "Eu vi um bumbum!",
+		"audio_thumb": ""
+	},
+		{
+		"audio_id": 91,
+		"audio_name": "zion_da_frente",
+		"audio_description": "Zion da frente",
+		"audio_thumb": ""
 	}
 ]

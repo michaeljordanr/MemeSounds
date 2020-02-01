@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity(), AudioListFragment.AudioListFragmentLis
         ViewPagerAdapter(this)
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -87,11 +86,7 @@ class MainActivity : AppCompatActivity(), AudioListFragment.AudioListFragmentLis
             override fun onQueryTextChange(query: String): Boolean {
                 viewPagerAdapter.setQuery(query)
                 viewPager.adapter = viewPagerAdapter
-
-//                if (query == "") {
-//                    searchView.isIconified = true
-//                    Utils.hideKeyboard(this@MainActivity)
-//                }
+                goToPage(selectedTab)
 
                 val params = Bundle()
                 val logFilter = "filter"

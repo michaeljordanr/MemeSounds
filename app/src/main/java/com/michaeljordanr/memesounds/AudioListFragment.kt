@@ -6,7 +6,6 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
 import android.os.Parcelable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,9 +24,12 @@ import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.parcel.Parcelize
+import java.text.Normalizer
 
-class AudioListFragment : Fragment(), AudioAdapter.RecyclerAdapterOnClickListener,
-        AudioAdapter.RecyclerAdapterOnLongListener, BottomSheetFragment.BottomSheetFragmentListener {
+class AudioListFragment : Fragment(),
+        AudioAdapter.RecyclerAdapterOnClickListener,
+        AudioAdapter.RecyclerAdapterOnLongListener,
+        BottomSheetFragment.BottomSheetFragmentListener {
 
     private lateinit var baseContext: Context
     private var rxAudioPlayer: RxAudioPlayer? = null
@@ -96,7 +98,7 @@ class AudioListFragment : Fragment(), AudioAdapter.RecyclerAdapterOnClickListene
 
                 if (query.isNotBlank()) {
                     audioList = audioList.filter { audio ->
-                        audio.audioDescription.toUpperCase().contains(query.toUpperCase())
+                        audio.audioDescription.unaccent().toUpperCase().contains(query.unaccent().toUpperCase())
                     }
                 }
             }
@@ -199,7 +201,6 @@ class AudioListFragment : Fragment(), AudioAdapter.RecyclerAdapterOnClickListene
     }
 
     override fun unbookmark(id: Int) {
-        Log.d("teste", "TESTE $id")
         sharedPreferencesObj()?.let { prefs ->
             val editor = prefs.edit()
             var bookmarks = getBookmarks()
@@ -212,11 +213,11 @@ class AudioListFragment : Fragment(), AudioAdapter.RecyclerAdapterOnClickListene
     }
 
     override fun bookmark(audio: Audio) {
-        Log.d("teste", "TESTE ${audio.id}")
         sharedPreferencesObj()?.let { prefs ->
             val editor = prefs.edit()
-            val bookmarks = getBookmarks()
+            var bookmarks = getBookmarks()
             bookmarks.add(audio)
+            bookmarks = ArrayList(bookmarks.distinctBy { it.id })
             editor.putString(BOOKMARKS_AUDIO_KEY, jsonAdapter.toJson(bookmarks))
             editor.apply()
 
@@ -225,4 +226,11 @@ class AudioListFragment : Fragment(), AudioAdapter.RecyclerAdapterOnClickListene
             }, 500)
         }
     }
+}
+
+private val REGEX_UNACCENT = "\\p{InCombiningDiacriticalMarks}+".toRegex()
+
+fun CharSequence.unaccent(): String {
+    val temp = Normalizer.normalize(this, Normalizer.Form.NFD)
+    return REGEX_UNACCENT.replace(temp, "")
 }
