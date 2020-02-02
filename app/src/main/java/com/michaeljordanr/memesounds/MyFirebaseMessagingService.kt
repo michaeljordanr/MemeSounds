@@ -15,12 +15,22 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     companion object {
         const val FCM_NOTIFICATION_ID = 1717
+
+        const val WEB_URL_PARAM = "web_url"
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
 
         val intent = Intent(this, MainActivity::class.java)
+
+        remoteMessage.data.isNotEmpty().let {
+            remoteMessage.notification?.let {
+                val webUrl = remoteMessage.data.get(key = WEB_URL_PARAM)
+                intent.putExtra(WEB_URL_PARAM, webUrl)
+            }
+        }
+
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0,
                 intent, PendingIntent.FLAG_ONE_SHOT)

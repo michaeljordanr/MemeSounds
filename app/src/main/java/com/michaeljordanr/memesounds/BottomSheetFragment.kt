@@ -4,20 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.flurry.android.FlurryAgent
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.firebase.analytics.FirebaseAnalytics
-import com.microsoft.appcenter.analytics.Analytics
 import kotlinx.android.synthetic.main.fragment_bottom_sheet_dialog.*
 
 class BottomSheetFragment(private val listener: BottomSheetFragmentListener) : BottomSheetDialogFragment() {
-    private lateinit var firebaseAnalytics: FirebaseAnalytics
     private lateinit var audio: Audio
     private var type = AudioListFragment.AudioListType.ALL
 
+    private var customApplication: CustomApplication? = null
+
     interface BottomSheetFragmentListener {
         fun onFinished()
-        fun unbookmark(id: Int)
+        fun unbookmark(audio: Audio)
         fun bookmark(audio: Audio)
     }
 
@@ -28,7 +26,7 @@ class BottomSheetFragment(private val listener: BottomSheetFragmentListener) : B
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         context?.let {
-            firebaseAnalytics = FirebaseAnalytics.getInstance(it)
+            customApplication = activity?.applicationContext as? CustomApplication
         }
 
         if (type == AudioListFragment.AudioListType.FAVORITES) {
@@ -42,7 +40,7 @@ class BottomSheetFragment(private val listener: BottomSheetFragmentListener) : B
 
         bt_favorite.setOnClickListener {
             if (type == AudioListFragment.AudioListType.FAVORITES) {
-                listener.unbookmark(audio.id)
+                listener.unbookmark(audio)
             } else {
                 listener.bookmark(audio)
             }
@@ -60,16 +58,12 @@ class BottomSheetFragment(private val listener: BottomSheetFragmentListener) : B
         context?.let {
             Utils.shareAudio(it, audio)
 
-            val audioName = audio.audioName
-            val params = Bundle()
-            val shareAudioLog = "share_audio"
-            params.putString("audio_name", audioName)
-            firebaseAnalytics.logEvent(shareAudioLog, params)
+            customApplication?.let { app ->
+                val params = HashMap<String, String>()
+                params["audio_name"] = audio.audioName
 
-            val logParams = HashMap<String, String>()
-            logParams["audio_name"] = audioName
-            FlurryAgent.logEvent(shareAudioLog, logParams)
-            Analytics.trackEvent(shareAudioLog, logParams)
+                app.sendAnalytics("share_audio", params)
+            }
         }
     }
 }

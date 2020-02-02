@@ -34,7 +34,6 @@ class AudioListFragment : Fragment(),
     private lateinit var baseContext: Context
     private var rxAudioPlayer: RxAudioPlayer? = null
     private var adapter: AudioAdapter? = null
-    private lateinit var firebaseAnalytics: FirebaseAnalytics
     private lateinit var activityListener: AudioListFragmentListener
 
     private val bottomSheetFragment by lazy { BottomSheetFragment(this) }
@@ -42,6 +41,8 @@ class AudioListFragment : Fragment(),
     private val typeData by lazy { Types.newParameterizedType(List::class.java, Audio::class.java) }
 
     lateinit var jsonAdapter: JsonAdapter<List<Audio>>
+
+    private var customApplication: CustomApplication? = null
 
     @Parcelize
     enum class AudioListType(val value: Int) : Parcelable {
@@ -71,6 +72,7 @@ class AudioListFragment : Fragment(),
         baseContext = context
         if (context is AudioListFragmentListener) {
             activityListener = context
+            customApplication = activity?.applicationContext as? CustomApplication
         }
     }
 
@@ -113,13 +115,6 @@ class AudioListFragment : Fragment(),
             recyclerView.adapter = adapter
 
             rxAudioPlayer = RxAudioPlayer.getInstance()
-
-            val openAppEvent = "open_app"
-            firebaseAnalytics = FirebaseAnalytics.getInstance(it)
-            firebaseAnalytics.logEvent(openAppEvent, null)
-
-            FlurryAgent.logEvent(openAppEvent)
-            Analytics.trackEvent(openAppEvent)
         }
     }
 
@@ -133,15 +128,12 @@ class AudioListFragment : Fragment(),
         val audioName = audio.audioName
         play(audioName)
 
-        val params = Bundle()
-        val playLog = "play"
-        params.putString("audio_name", audioName)
-        firebaseAnalytics.logEvent(playLog, params)
+        customApplication?.let {
+            val params = HashMap<String, String>()
+            params["audio_name"] = audioName
 
-        val logParams = HashMap<String, String>()
-        logParams["audio_name"] = audioName
-        FlurryAgent.logEvent(playLog, logParams)
-        Analytics.trackEvent(playLog, logParams)
+            it.sendAnalytics("play", params)
+        }
     }
 
     override fun onLongClick(audio: Audio) {
@@ -200,15 +192,22 @@ class AudioListFragment : Fragment(),
         }
     }
 
-    override fun unbookmark(id: Int) {
+    override fun unbookmark(audio: Audio) {
         sharedPreferencesObj()?.let { prefs ->
             val editor = prefs.edit()
             var bookmarks = getBookmarks()
-            bookmarks = ArrayList(bookmarks.filter { audio -> audio.id != id })
+            bookmarks = ArrayList(bookmarks.filter { b -> b.id != audio.id })
             editor.putString(BOOKMARKS_AUDIO_KEY, jsonAdapter.toJson(bookmarks))
             editor.apply()
 
             adapter?.setData(getBookmarks())
+
+            customApplication?.let { app ->
+                val params = HashMap<String, String>()
+                params["audio_name"] = audio.audioName
+
+                app.sendAnalytics("unbookmark", params)
+            }
         }
     }
 
@@ -220,6 +219,13 @@ class AudioListFragment : Fragment(),
             bookmarks = ArrayList(bookmarks.distinctBy { it.id })
             editor.putString(BOOKMARKS_AUDIO_KEY, jsonAdapter.toJson(bookmarks))
             editor.apply()
+
+            customApplication?.let { app ->
+                val params = HashMap<String, String>()
+                params["audio_name"] = audio.audioName
+
+                app.sendAnalytics("bookmark", params)
+            }
 
             Handler().postDelayed({
                 activityListener.goToPage(AudioListType.FAVORITES)
