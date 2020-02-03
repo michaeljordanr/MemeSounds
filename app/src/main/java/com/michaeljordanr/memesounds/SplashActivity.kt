@@ -24,7 +24,7 @@ class SplashActivity : AppCompatActivity(), Runnable {
 
         intent?.extras?.let {
             val url = it.getString(MyFirebaseMessagingService.WEB_URL_PARAM) ?: ""
-            url.isNotBlank().let {
+            if (url.isNotEmpty()) {
                 val openBrowserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                 startActivity(openBrowserIntent)
 
