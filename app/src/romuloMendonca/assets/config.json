@@ -1,560 +1,290 @@
 [
 	{
-		"audio_id": 0,
+		"id": 0,
 		"audio_name": "aqui_nao_lambisgoia",
 		"audio_description": "Aqui não lambisgoia!",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 1,
+		"id": 1,
 		"audio_name": "aqui_nao_nenem",
 		"audio_description": "Aqui não neném",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 2,
+		"id": 2,
 		"audio_name": "boom_boom_boom_shakalaka",
 		"audio_description": "BOOM BOOM BOOM SHAKALAKA",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 3,
+		"id": 3,
 		"audio_name": "chama_o_joao_kleber_chamao_teste_de_fidelidade",
 		"audio_description": "CHAMA O JOÃO KLÉBER",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 4,
+		"id": 4,
 		"audio_name": "com_licenca_pra_matar",
 		"audio_description": "Com licença pra matar",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 5,
+		"id": 5,
 		"audio_name": "doutrinador_selvagem",
 		"audio_description": "Doutrinado Selvagem",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 6,
+		"id": 6,
 		"audio_name": "ela_disse_adeus",
 		"audio_description": "E ELA DISSE ADEUS",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 7,
+		"id": 7,
 		"audio_name": "facinora_maravilhoso",
 		"audio_description": "Facinora maravilhoso",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 8,
+		"id": 8,
 		"audio_name": "feroz",
 		"audio_description": "FEROZ!",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 9,
+		"id": 9,
 		"audio_name": "lebrao_ladrao_roubou_meu_coracao",
 		"audio_description": "Lebrão, ladrão, roubou meu coração",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 10,
+		"id": 10,
 		"audio_name": "macho_alpha",
 		"audio_description": "Macho alpha!",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 11,
+		"id": 11,
 		"audio_name": "manda_nudes",
 		"audio_description": "Manda Nudes!",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 4,
+		"id": 4,
 		"audio_name": "me_engravida",
 		"audio_description": "Me engravida!",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 12,
+		"id": 12,
 		"audio_name": "mensageiro_do_caos",
 		"audio_description": "Mensageiro do caos",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 13,
+		"id": 13,
 		"audio_name": "minha_mae_do_ceu",
 		"audio_description": "Minha mãe do céu",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 14,
+		"id": 14,
 		"audio_name": "o_caos",
 		"audio_description": "O caos!",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 15,
+		"id": 15,
 		"audio_name": "o_papai_chegou",
 		"audio_description": "O papai chegou",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 16,
+		"id": 16,
 		"audio_name": "olha_o_kibe_e_a_esfiha_ta_liberada",
 		"audio_description": "Olha o kibe e a esfilha ta liberada",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 18,
+		"id": 18,
 		"audio_name": "onde_esta_seu_deus",
 		"audio_description": "Onde esta seu Deus?",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 19,
+		"id": 19,
 		"audio_name": "por_que_voce_me_deixa_tao_solto",
 		"audio_description": "Por que você me deixa tão solto?",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 20,
+		"id": 20,
 		"audio_name": "porteiraco_do_enem",
 		"audio_description": "Porteiraço do ENEM",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 21,
+		"id": 21,
 		"audio_name": "que_homem",
 		"audio_description": "QUE HOMEM",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 22,
+		"id": 22,
 		"audio_name": "ragatanga",
 		"audio_description": "Ragatanga",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 23,
+		"id": 23,
 		"audio_name": "senhora_volta_aqui",
 		"audio_description": "Senhora volta aqui",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 24,
+		"id": 24,
 		"audio_name": "splash",
 		"audio_description": "Splash",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 25,
+		"id": 25,
 		"audio_name": "sua_sirigaita_louca",
 		"audio_description": "Sua sirigaita louca",
 		"audio_thumb": ""
 	},
 		{
-		"audio_id": 17,
+		"id": 17,
 		"audio_name": "tumbalacatumba",
 		"audio_description": "Tumbalacatumba",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 26,
+		"id": 26,
 		"audio_name": "veneno_jararaca",
 		"audio_description": "O veneno da jararaca",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 27,
+		"id": 27,
 		"audio_name": "o_dia_que_barba_mitou",
 		"audio_description": "O dia em que barba mitou",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 28,
+		"id": 28,
 		"audio_name": "papaaaaaaaiii",
 		"audio_description": "PAPAAAAAAIIIIIII",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 29,
+		"id": 29,
 		"audio_name": "denovo_com_palhacada",
 		"audio_description": "De novo com PALHAÇADA!!!",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 30,
+		"id": 30,
 		"audio_name": "ele_arrasou_ele_roubou_meu_coracao",
 		"audio_description": "Ele arrasou, ele roubou meu coração!",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 31,
+		"id": 31,
 		"audio_name": "voce_e_muleke_voce_e_safado",
 		"audio_description": "Você é muleke! Você é safado!",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 32,
+		"id": 32,
 		"audio_name": "vai_pra_saturo_jupiter_outra_galaxia",
 		"audio_description": "Vai pra Saturno, pra Jupiter, pra outra galáxia",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 33,
+		"id": 33,
 		"audio_name": "shhh_a_que_jararaca_safada",
 		"audio_description": "shhhhh, que jararaca safada!",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 34,
+		"id": 34,
 		"audio_name": "e_e_fatal_e_fataaaaal",
 		"audio_description": "e é fatal, é fataaaalll11!",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 35,
+		"id": 35,
 		"audio_name": "ele_nao_tem_piedade",
 		"audio_description": "Ele não tem piedade",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 36,
+		"id": 36,
 		"audio_name": "silenciador_ativado_bola_de_fogo",
 		"audio_description": "Silenciador ativado bola de fogo",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 37,
+		"id": 37,
 		"audio_name": "caai_toda_dengosa",
 		"audio_description": "Caai toda dengosa!",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 38,
+		"id": 38,
 		"audio_name": "convite_ao_prazer",
 		"audio_description": "Convite ao prazer",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 39,
+		"id": 39,
 		"audio_name": "so_os_loucos",
 		"audio_description": "Só os loucos sabem",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 40,
+		"id": 40,
 		"audio_name": "pegadinha_malandro",
 		"audio_description": "Pedadinha do malandro",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 41,
+		"id": 41,
 		"audio_name": "atropelaram_a_moca",
 		"audio_description": "Atropelaram a moça",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 42,
+		"id": 42,
 		"audio_name": "touchdown",
 		"audio_description": "TOUCHDOWN!",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 43,
+		"id": 43,
 		"audio_name": "opsss",
 		"audio_description": "OPSS!!!",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 44,
+		"id": 44,
 		"audio_name": "brinquedo_assassino",
 		"audio_description": "O Brinquedo Assassino",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 45,
+		"id": 45,
 		"audio_name": "diretaco",
 		"audio_description": "Diretaço!!!",
 		"audio_thumb": ""
 	},
 	{
-		"audio_id": 46,
+		"id": 46,
 		"audio_name": "o_amor_esta_no_ar",
 		"audio_description": "O amor está no ar",
-		"audio_thumb": ""
-	},
-	{
-		"audio_id": 47,
-		"audio_name": "ele_viu_no_chao_teve_nojo",
-		"audio_description": "Viu o adversário no chão e teve nojo",
-		"audio_thumb": ""
-	},
-	{
-		"audio_id": 48,
-		"audio_name": "papinha_do_nene",
-		"audio_description": "Papinha do Nene",
-		"audio_thumb": ""
-	},
-	{
-		"audio_id": 49,
-		"audio_name": "barbudo_monumental_incendiario_impiedoso",
-		"audio_description": "Barbudo monumental, incendiário, impiedoso",
-		"audio_thumb": ""
-	},
-	{
-		"audio_id": 50,
-		"audio_name": "xo_satanas",
-		"audio_description": "Xô satanás",
-		"audio_thumb": ""
-	},
-	{
-		"audio_id": 51,
-		"audio_name": "uma_seducao_indomavel_avassaladora",
-		"audio_description": "Uma sedução indomável, avassaladora",
-		"audio_thumb": ""
-	},
-	{
-		"audio_id": 52,
-		"audio_name": "eh_o_caos",
-		"audio_description": "é o caaaooss",
-		"audio_thumb": ""
-	},
-	{
-		"audio_id": 53,
-		"audio_name": "despota_sem_piedade",
-		"audio_description": "Déspota sem piedade",
-		"audio_thumb": ""
-	},
-	{
-		"audio_id": 54,
-		"audio_name": "mensageiro_do_caos_arruaceiro_fatal",
-		"audio_description": "Mensageiro do caos, arruaceiro fatal",
-		"audio_thumb": ""
-	},
-	{
-		"audio_id": 55,
-		"audio_name": "pega_fogo_o_cabare",
-		"audio_description": "Pega fogo o cabaré",
-		"audio_thumb": ""
-	},
-	{
-		"audio_id": 56,
-		"audio_name": "coisa_medonha_coisa_miseravel",
-		"audio_description": "Coisa medonha, coisa miserável",
-		"audio_thumb": ""
-	},
-	{
-		"audio_id": 57,
-		"audio_name": "saudades",
-		"audio_description": "Saudades",
-		"audio_thumb": ""
-	},
-	{
-		"audio_id": 58,
-		"audio_name": "foi_pra_voce_bebe",
-		"audio_description": "Foi pra você, bebê",
-		"audio_thumb": ""
-	},
-	{
-		"audio_id": 59,
-		"audio_name": "grita_o_que_homem_ai",
-		"audio_description": "Grita Que Homem aí",
-		"audio_thumb": ""
-	},
-	{
-		"audio_id": 60,
-		"audio_name": "toca_raul",
-		"audio_description": "Toca Raul!",
-		"audio_thumb": ""
-	},
-	{
-		"audio_id": 61,
-		"audio_name": "sensualizando",
-		"audio_description": "Sensualizando",
-		"audio_thumb": ""
-	},
-	{
-		"audio_id": 62,
-		"audio_name": "sedutora_da_noite",
-		"audio_description": "Sedutora da noite",
-		"audio_thumb": ""
-	},
-	{
-		"audio_id": 63,
-		"audio_name": "feito_de_trouxa_",
-		"audio_description": "Feito de trouxa",
-		"audio_thumb": ""
-	},
-	{
-		"audio_id": 64,
-		"audio_name": "modo_aviao",
-		"audio_description": "Modo avião",
-		"audio_thumb": ""
-	},
-	{
-		"audio_id": 65,
-		"audio_name": "miraculoso_chama_vaticano",
-		"audio_description": "Miraculoso, chama o Vaticano",
-		"audio_thumb": ""
-	},
-	{
-		"audio_id": 66,
-		"audio_name": "naaaooo",
-		"audio_description": "Nãããooo",
-		"audio_thumb": ""
-	},
-	{
-		"audio_id": 67,
-		"audio_name": "que_indelicado_serjao",
-		"audio_description": "Que indelicado, Serjão",
-		"audio_thumb": ""
-	},
-	{
-		"audio_id": 68,
-		"audio_name": "guloso",
-		"audio_description": "Guloso",
-		"audio_thumb": ""
-	},
-	{
-		"audio_id": 69,
-		"audio_name": "wilson",
-		"audio_description": "Wilson",
-		"audio_thumb": ""
-	},
-	{
-		"audio_id": 70,
-		"audio_name": "ney_latorraca",
-		"audio_description": "Ney Latorraca",
-		"audio_thumb": ""
-	},
-	{
-		"audio_id": 71,
-		"audio_name": "abusado_asanhado",
-		"audio_description": "Abusado, assanhado",
-		"audio_thumb": ""
-	},
-	{
-		"audio_id": 72,
-		"audio_name": "assustador",
-		"audio_description": "Assustador!",
-		"audio_thumb": ""
-	},
-		{
-		"audio_id": 73,
-		"audio_name": "ahhhh",
-		"audio_description": "Ahhh!",
-		"audio_thumb": ""
-	},
-		{
-		"audio_id": 74,
-		"audio_name": "ta_o_incendiario",
-		"audio_description": "Tá o incendiário",
-		"audio_thumb": ""
-	},
-		{
-		"audio_id": 75,
-		"audio_name": "o_dragao_barbudo",
-		"audio_description": "O dragão barbudo",
-		"audio_thumb": ""
-	},
-		{
-		"audio_id": 76,
-		"audio_name": "nao_naaaooo",
-		"audio_description": "Não, naaaooo!",
-		"audio_thumb": ""
-	},
-		{
-		"audio_id": 77,
-		"audio_name": "vai_ficar_louco",
-		"audio_description": "Vai ficar louco",
-		"audio_thumb": ""
-	},
-		{
-		"audio_id": 78,
-		"audio_name": "oto_patama",
-		"audio_description": "Oto patamá",
-		"audio_thumb": ""
-	},
-		{
-		"audio_id": 79,
-		"audio_name": "acabou_a_mamata",
-		"audio_description": "Acabou a mamata",
-		"audio_thumb": ""
-	},
-		{
-		"audio_id": 80,
-		"audio_name": "aqui_nao",
-		"audio_description": "Aqui não",
-		"audio_thumb": ""
-	},
-		{
-		"audio_id": 81,
-		"audio_name": "lanso_a_braba",
-		"audio_description": "Lanso a braba",
-		"audio_thumb": ""
-	},
-		{
-		"audio_id": 82,
-		"audio_name": "eis_o_despota",
-		"audio_description": "Eis o déspota!",
-		"audio_thumb": ""
-	},
-		{
-		"audio_id": 83,
-		"audio_name": "teve_fight_de_bumbum",
-		"audio_description": "Teve um fight de bumbum",
-		"audio_thumb": ""
-	},
-		{
-		"audio_id": 84,
-		"audio_name": "ze_pequeno_impiedoso",
-		"audio_description": "Zé pequeno impiedoso!",
-		"audio_thumb": ""
-	},
-		{
-		"audio_id": 85,
-		"audio_name": "que_audacia",
-		"audio_description": "Que audácia",
-		"audio_thumb": ""
-	},
-		{
-		"audio_id": 86,
-		"audio_name": "papaaaiii",
-		"audio_description": "Papaaaiii",
-		"audio_thumb": ""
-	},
-		{
-		"audio_id": 87,
-		"audio_name": "ai_vem_o_desespero",
-		"audio_description": "Aí vem o desespero",
-		"audio_thumb": ""
-	},
-		{
-		"audio_id": 88,
-		"audio_name": "eee_veeemm",
-		"audio_description": "eee veeemm",
-		"audio_thumb": ""
-	},
-		{
-		"audio_id": 89,
-		"audio_name": "que_ta_acontecendo_ai",
-		"audio_description": "Que tá acontecendo aí?",
-		"audio_thumb": ""
-	},
-		{
-		"audio_id": 90,
-		"audio_name": "eu_vi_um_bumbum",
-		"audio_description": "Eu vi um bumbum!",
-		"audio_thumb": ""
-	},
-		{
-		"audio_id": 91,
-		"audio_name": "zion_da_frente",
-		"audio_description": "Zion da frente",
 		"audio_thumb": ""
 	}
 ]
