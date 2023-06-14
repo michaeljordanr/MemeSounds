@@ -14,7 +14,6 @@ import java.io.IOException
 import java.io.InputStream
 import java.nio.charset.Charset
 
-
 object Utils {
     const val AUDIO_FORMAT = ".mp3"
     const val APP_CENTER_KEY = "6e27bac1-b9c7-48c1-aec1-8a08c6512fca"
@@ -87,7 +86,7 @@ object Utils {
                 `in`.close()
                 out.close()
             }
-            val uri: Uri = FileProvider.getUriForFile(context, "${BuildConfig.APPLICATION_ID}.fileprovider", tmpFile.absoluteFile)
+            val uri: Uri = FileProvider.getUriForFile(context, ".fileprovider", tmpFile.absoluteFile)
             val share = Intent(Intent.ACTION_SEND)
             share.type = "audio/mpeg3"
             share.putExtra(Intent.EXTRA_STREAM, uri)

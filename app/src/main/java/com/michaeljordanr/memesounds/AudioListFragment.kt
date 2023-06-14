@@ -3,6 +3,8 @@ package com.michaeljordanr.memesounds
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.res.AssetManager
+import android.media.SoundPool
 import android.os.Bundle
 import android.os.Handler
 import android.os.Parcelable
@@ -12,19 +14,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.flurry.android.FlurryAgent
-import com.github.piasy.rxandroidaudio.PlayConfig
-import com.github.piasy.rxandroidaudio.RxAudioPlayer
-import com.google.firebase.analytics.FirebaseAnalytics
-import com.microsoft.appcenter.analytics.Analytics
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
-import io.reactivex.Observer
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import java.text.Normalizer
+import java.util.Locale
 
 class AudioListFragment : Fragment(),
         AudioAdapter.RecyclerAdapterOnClickListener,
@@ -32,7 +27,6 @@ class AudioListFragment : Fragment(),
         BottomSheetFragment.BottomSheetFragmentListener {
 
     private lateinit var baseContext: Context
-    private var rxAudioPlayer: RxAudioPlayer? = null
     private var adapter: AudioAdapter? = null
     private lateinit var activityListener: AudioListFragmentListener
 
@@ -43,6 +37,9 @@ class AudioListFragment : Fragment(),
     lateinit var jsonAdapter: JsonAdapter<List<Audio>>
 
     private var customApplication: CustomApplication? = null
+    var streamingId = 0
+    var soundPool: SoundPool? = null
+    var assetManager : AssetManager? = null
 
     @Parcelize
     enum class AudioListType(val value: Int) : Parcelable {
@@ -85,6 +82,9 @@ class AudioListFragment : Fragment(),
         super.onViewCreated(view, savedInstanceState)
         jsonAdapter = moshi.adapter(typeData)
 
+        soundPool = SoundPool.Builder().setMaxStreams(1).build()
+        assetManager = context?.assets
+
         context?.let {
             var audioList = getAudioList()
 
@@ -100,7 +100,8 @@ class AudioListFragment : Fragment(),
 
                 if (query.isNotBlank()) {
                     audioList = audioList.filter { audio ->
-                        audio.audioDescription.unaccent().toUpperCase().contains(query.unaccent().toUpperCase())
+                        audio.audioDescription.unaccent().uppercase(Locale.getDefault())
+                            .contains(query.unaccent().uppercase(Locale.getDefault()))
                     }
                 }
             }
@@ -113,8 +114,6 @@ class AudioListFragment : Fragment(),
             recyclerView.layoutManager = layoutManager
             recyclerView.setHasFixedSize(true)
             recyclerView.adapter = adapter
-
-            rxAudioPlayer = RxAudioPlayer.getInstance()
         }
     }
 
@@ -147,25 +146,15 @@ class AudioListFragment : Fragment(),
 
     private fun play(audioName: String) {
         context?.let {
-            val audioLoaded =
-                    PlayConfig.res(it, Utils.getAudioIdFromRaw(it, audioName))
-                            .looping(false) // loop or not
-                            .leftVolume(1.0f) // left volume
-                            .rightVolume(1.0f) // right volume
-                            .build() // build this config and play!
+            if (streamingId > 0) {
+                soundPool?.stop(streamingId)
+            }
 
-            rxAudioPlayer!!.play(audioLoaded)
-                    .subscribeOn(Schedulers.io())
-                    .subscribe(object : Observer<Boolean> {
-                        override fun onComplete() {}
-
-                        override fun onSubscribe(d: Disposable) {}
-
-                        override fun onNext(t: Boolean) {}
-
-                        override fun onError(e: Throwable) {}
-
-                    })
+            val soundDescriptor = assetManager?.openFd(audioName + Utils.AUDIO_FORMAT)
+            val soundId = soundPool?.load(soundDescriptor, 1) ?: 0
+            soundPool?.setOnLoadCompleteListener { _, _, _ ->
+                streamingId = soundPool?.play(soundId, 1.0f, 1.0f, 1, 0, 1.0f) ?: 0
+            }
         }
     }
 
@@ -231,6 +220,11 @@ class AudioListFragment : Fragment(),
                 activityListener.goToPage(AudioListType.FAVORITES)
             }, 500)
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        soundPool?.stop(streamingId)
     }
 }
 

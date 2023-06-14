@@ -1,11 +1,13 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'io.fabric'
-
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-parcelize'
+}
 
 android {
+    namespace 'com.michaeljordanr.memesounds'
+    compileSdk 33
+
     signingConfigs {
         config {
             keyAlias 'memesound'
@@ -14,27 +16,27 @@ android {
             storePassword 'memesound'
         }
     }
-    compileSdkVersion 29
-    buildToolsVersion '29.0.2'
+
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 29
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        vectorDrawables.useSupportLibrary = true
-    }
-    buildTypes {
-        release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        applicationId "com.michaeljordanr.memesounds"
+        minSdk 24
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+        flavorDimensions "default"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
         }
     }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
     }
-
-    flavorDimensions 'tier'
     productFlavors {
         negaoDeRosa {
             applicationId = 'com.michaeljordanr.memesounds.negaoderosa'
@@ -55,35 +57,43 @@ android {
             versionName '1.0'
         }
     }
-
-    androidExtensions {
-        experimental = true
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.3.2'
+    }
+    viewBinding {
+        enabled = true
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
     }
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    //noinspection GradleCompatible
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
-    implementation 'androidx.core:core-ktx:1.1.0'
-    implementation 'com.google.android.material:material:1.2.0-alpha04'
-    implementation 'com.google.android.play:core:1.6.4'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'com.google.android.play:core:1.10.3'
 
     implementation "com.squareup.retrofit2:converter-moshi:2.6.1"
-    implementation 'com.github.piasy:rxandroidaudio:1.6.0'
-    implementation 'com.github.piasy:AudioProcessor:1.6.0'
-    implementation 'org.apache.commons:commons-io:1.3.2'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.google.firebase:firebase-core:17.2.2'
     implementation 'com.google.firebase:firebase-messaging:20.1.0'
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
-    implementation 'com.flurry.android:analytics:11.6.0@aar'
-    implementation "com.microsoft.appcenter:appcenter-analytics:$appCenterSdkVersion"
-    implementation "com.microsoft.appcenter:appcenter-crashes:$appCenterSdkVersion"
-}
+    implementation 'org.apache.commons:commons-io:1.3.2'
 
-apply plugin: 'com.google.gms.google-services'
-apply plugin: 'kotlin-android-extensions'
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}

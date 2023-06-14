@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity(), AudioListFragment.AudioListFragmentLis
         const val APP_UPDATE_REQUEST_CODE = 1137
     }
 
-    lateinit var customApplication: CustomApplication
     var selectedTab = AudioListFragment.AudioListType.ALL
 
     lateinit var viewPager: ViewPager2
@@ -44,8 +43,6 @@ class MainActivity : AppCompatActivity(), AudioListFragment.AudioListFragmentLis
         if (supportActionBar != null) {
             supportActionBar!!.setTitle(R.string.app_name)
         }
-
-        customApplication = application as CustomApplication
 
         viewPager = findViewById(R.id.view_pager)
         tabs = findViewById(R.id.tab_layout)
@@ -99,7 +96,6 @@ class MainActivity : AppCompatActivity(), AudioListFragment.AudioListFragmentLis
                 val params = HashMap<String, String>()
                 params["query"] = query
 
-                customApplication.sendAnalytics("filter", params)
                 return false
             }
         })

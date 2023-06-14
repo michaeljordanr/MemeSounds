@@ -5,13 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.fragment_bottom_sheet_dialog.*
+import com.michaeljordanr.memesounds.databinding.FragmentBottomSheetDialogBinding
 
 class BottomSheetFragment(private val listener: BottomSheetFragmentListener) : BottomSheetDialogFragment() {
     private lateinit var audio: Audio
     private var type = AudioListFragment.AudioListType.ALL
 
     private var customApplication: CustomApplication? = null
+    private lateinit var binding: FragmentBottomSheetDialogBinding
 
     interface BottomSheetFragmentListener {
         fun onFinished()
@@ -20,7 +21,8 @@ class BottomSheetFragment(private val listener: BottomSheetFragmentListener) : B
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_bottom_sheet_dialog, container, false)
+        binding = FragmentBottomSheetDialogBinding.inflate(layoutInflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,15 +32,15 @@ class BottomSheetFragment(private val listener: BottomSheetFragmentListener) : B
         }
 
         if (type == AudioListFragment.AudioListType.FAVORITES) {
-            bt_favorite.text = getString(R.string.unbookmark)
+            binding.btFavorite.text = getString(R.string.unbookmark)
         }
 
-        bt_share.setOnClickListener {
+        binding.btShare.setOnClickListener {
             shareAudio(audio)
             listener.onFinished()
         }
 
-        bt_favorite.setOnClickListener {
+        binding.btFavorite.setOnClickListener {
             if (type == AudioListFragment.AudioListType.FAVORITES) {
                 listener.unbookmark(audio)
             } else {
