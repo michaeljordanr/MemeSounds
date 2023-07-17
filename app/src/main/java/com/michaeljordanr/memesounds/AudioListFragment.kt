@@ -34,12 +34,12 @@ class AudioListFragment : Fragment(),
     private val moshi by lazy { Moshi.Builder().build() }
     private val typeData by lazy { Types.newParameterizedType(List::class.java, Audio::class.java) }
 
-    lateinit var jsonAdapter: JsonAdapter<List<Audio>>
+    private lateinit var jsonAdapter: JsonAdapter<List<Audio>>
 
     private var customApplication: CustomApplication? = null
-    var streamingId = 0
-    var soundPool: SoundPool? = null
-    var assetManager : AssetManager? = null
+    private var streamingId = 0
+    private var soundPool: SoundPool? = null
+    private var assetManager : AssetManager? = null
 
     @Parcelize
     enum class AudioListType(val value: Int) : Parcelable {

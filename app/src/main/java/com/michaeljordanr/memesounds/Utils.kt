@@ -16,8 +16,6 @@ import java.nio.charset.Charset
 
 object Utils {
     const val AUDIO_FORMAT = ".mp3"
-    const val APP_CENTER_KEY = "6e27bac1-b9c7-48c1-aec1-8a08c6512fca"
-    const val FLURRY_KEY = "CC6FRJVJF7KS7FSM2RDP"
 
     fun getDrawableId(c: Context, imageName: String): Int {
         val packageName = c.applicationContext.packageName
@@ -72,7 +70,7 @@ object Utils {
     fun shareAudio(context: Context, audio: Audio) {
         try {
             val audioName = audio.audioName.removeSuffix(AUDIO_FORMAT)
-            val tmpFile = File(context.cacheDir.toString() + "/$audioName + $AUDIO_FORMAT")
+            val tmpFile = File(context.cacheDir.toString() + "/$audioName$AUDIO_FORMAT")
             val id = getAudioIdFromRaw(context, audioName)
             val `in`: InputStream = context.resources.openRawResource(id)
             val out = FileOutputStream(tmpFile, false)
@@ -86,7 +84,12 @@ object Utils {
                 `in`.close()
                 out.close()
             }
-            val uri: Uri = FileProvider.getUriForFile(context, ".fileprovider", tmpFile.absoluteFile)
+            val uri: Uri = FileProvider.getUriForFile(
+                context,
+                "com.michaeljordanr.memesounds.romulomendonca.fileprovider",
+                tmpFile.absoluteFile
+            )
+
             val share = Intent(Intent.ACTION_SEND)
             share.type = "audio/mpeg3"
             share.putExtra(Intent.EXTRA_STREAM, uri)
@@ -95,11 +98,16 @@ object Utils {
             context.startActivity(intent)
         } catch (e: Exception) {
             Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show()
+            e.printStackTrace()
         }
     }
 
     fun getAudioIdFromRaw(context: Context, audioName: String): Int {
-        return context.resources.getIdentifier(audioName.removeSuffix(AUDIO_FORMAT), "raw", context.packageName)
+        return context.resources.getIdentifier(
+            audioName.removeSuffix(AUDIO_FORMAT),
+            "raw",
+            context.packageName
+        )
     }
 
     fun hideKeyboard(activity: Activity) {

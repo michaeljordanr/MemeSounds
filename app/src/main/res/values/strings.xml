@@ -13,4 +13,5 @@
     <string name="bookmarks">Bookmarks</string>
     <string name="unbookmark">Unbookmark</string>
     <string name="all">All</string>
+    <string name="title_activity_new_main">NewMainActivity</string>
 </resources>
