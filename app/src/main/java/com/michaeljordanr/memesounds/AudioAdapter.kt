@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
+import com.michaeljordanr.memesounds.refactor.Utils
 
 class AudioAdapter(private var context: Context, private val callbackOnClick: RecyclerAdapterOnClickListener,
                    private val callbackOnLongClick: RecyclerAdapterOnLongListener) : RecyclerView.Adapter<AudioAdapter.RecyclerViewHolder>(), Filterable {

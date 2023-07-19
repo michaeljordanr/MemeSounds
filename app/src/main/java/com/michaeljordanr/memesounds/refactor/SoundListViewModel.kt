@@ -1,14 +1,12 @@
 package com.michaeljordanr.memesounds.refactor
 
 import android.app.Application
-import android.content.res.AssetManager
 import android.media.SoundPool
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.AndroidViewModel
 import com.michaeljordanr.memesounds.Audio
 import com.michaeljordanr.memesounds.MainActivity
-import com.michaeljordanr.memesounds.Utils
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
@@ -24,12 +22,9 @@ class SoundListViewModel(private val application: Application) : AndroidViewMode
 
     private var streamingId = 0
     private var soundPool: SoundPool? = null
-    private var assetManager: AssetManager? = null
 
     init {
         soundPool = SoundPool.Builder().setMaxStreams(1).build()
-        assetManager = application.baseContext?.assets
-
         _soundListState.addAll(getAudioList())
     }
 
@@ -41,12 +36,13 @@ class SoundListViewModel(private val application: Application) : AndroidViewMode
     }
 
     fun play(audioName: String) {
-        application.baseContext?.let {
+        application.baseContext?.let { context ->
             if (streamingId > 0) {
                 soundPool?.stop(streamingId)
             }
 
-            val soundDescriptor = assetManager?.openFd(audioName + Utils.AUDIO_FORMAT)
+            val id = Utils.getAudioIdFromRaw(context, audioName)
+            val soundDescriptor = context.resources.openRawResourceFd(id)
             val soundId = soundPool?.load(soundDescriptor, 1) ?: 0
             soundPool?.setOnLoadCompleteListener { _, _, _ ->
                 streamingId = soundPool?.play(

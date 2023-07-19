@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.michaeljordanr.memesounds.databinding.FragmentBottomSheetDialogBinding
+import com.michaeljordanr.memesounds.refactor.Utils
 
 class BottomSheetFragment(private val listener: BottomSheetFragmentListener) : BottomSheetDialogFragment() {
     private lateinit var audio: Audio

@@ -1,4 +1,4 @@
-package com.michaeljordanr.memesounds
+package com.michaeljordanr.memesounds.refactor
 
 import android.app.Activity
 import android.content.Context
@@ -7,6 +7,7 @@ import android.net.Uri
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.content.FileProvider
+import com.michaeljordanr.memesounds.Audio
 import org.apache.commons.io.IOUtils
 import java.io.File
 import java.io.FileOutputStream
@@ -72,21 +73,16 @@ object Utils {
             val audioName = audio.audioName.removeSuffix(AUDIO_FORMAT)
             val tmpFile = File(context.cacheDir.toString() + "/$audioName$AUDIO_FORMAT")
             val id = getAudioIdFromRaw(context, audioName)
-            val `in`: InputStream = context.resources.openRawResource(id)
-            val out = FileOutputStream(tmpFile, false)
-            val buff = ByteArray(1024)
-            var read: Int
-            try {
-                while (`in`.read(buff).also { read = it } > 0) {
-                    out.write(buff, 0, read)
-                }
-            } finally {
-                `in`.close()
-                out.close()
+            val bytes = context.resources.openRawResource(id).use {
+                    it.readBytes()
             }
+            FileOutputStream(tmpFile).use {
+                it.write(bytes)
+            }
+
             val uri: Uri = FileProvider.getUriForFile(
                 context,
-                "com.michaeljordanr.memesounds.romulomendonca.fileprovider",
+                "${context.packageName}.fileprovider",
                 tmpFile.absoluteFile
             )
 

@@ -52,7 +52,7 @@ android {
             versionName "2.0.2"
         }
         seuAntonio {
-            applicationId = 'com.michaeljordanr.seuantonio'
+            applicationId = 'com.michaeljordanr.memesounds.seuantonio'
             signingConfig signingConfigs.config
             versionCode 1
             versionName '1.0'
