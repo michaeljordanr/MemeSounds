@@ -1,4 +1,4 @@
-package com.michaeljordanr.memesounds.refactor
+package com.michaeljordanr.memesounds
 
 import android.app.Activity
 import android.content.Context
@@ -7,7 +7,7 @@ import android.net.Uri
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.content.FileProvider
-import com.michaeljordanr.memesounds.Audio
+import com.michaeljordanr.memesounds.model.Audio
 import org.apache.commons.io.IOUtils
 import java.io.File
 import java.io.FileOutputStream

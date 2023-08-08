@@ -9,13 +9,13 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.michaeljordanr.memesounds.presentation.MainActivity
 
 
-class MyFirebaseMessagingService : FirebaseMessagingService() {
+class CustomFirebaseMessagingService : FirebaseMessagingService() {
 
     companion object {
         const val FCM_NOTIFICATION_ID = 1717
-
         const val WEB_URL_PARAM = "web_url"
     }
 
@@ -46,6 +46,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                     NotificationManager.IMPORTANCE_DEFAULT)
             manager.createNotificationChannel(channel)
         }
+
         manager.notify(FCM_NOTIFICATION_ID, builder.build())
     }
 

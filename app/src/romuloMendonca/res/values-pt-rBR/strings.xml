@@ -15,4 +15,5 @@
     <string name="bookmarks">Favoritos</string>
     <string name="unbookmark">Desfavoritar</string>
     <string name="all">Todos</string>
+    <string name="no_bookmarks">Nenhum favorito</string>
 </resources>

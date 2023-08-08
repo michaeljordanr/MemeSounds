@@ -1,9 +1,9 @@
-package com.michaeljordanr.memesounds
+package com.michaeljordanr.memesounds.model
 
 import com.squareup.moshi.Json
 
 data class Audio(
-        @field:Json(name = "audio_id")
+        @field:Json(name = "id")
         var id: Int,
         @field:Json(name = "audio_name")
         var audioName: String,

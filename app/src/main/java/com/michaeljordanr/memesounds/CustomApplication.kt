@@ -4,15 +4,19 @@ import android.app.Application
 import android.os.Bundle
 import android.util.Log
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.FirebaseApp
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.iid.FirebaseInstanceId
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class CustomApplication : Application() {
     private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     override fun onCreate() {
         super.onCreate()
 
+        FirebaseApp.initializeApp(baseContext)
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         FirebaseInstanceId.getInstance().instanceId

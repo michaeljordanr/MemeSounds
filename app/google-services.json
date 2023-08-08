@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1047314156918",
+    "firebase_url": "https://romulomendocabordoes.firebaseio.com",
+    "project_id": "romulomendocabordoes",
+    "storage_bucket": "romulomendocabordoes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1047314156918:android:d00c5c5a3f93f2d5",
+        "android_client_info": {
+          "package_name": "com.michaeljordanr.memesounds.romulomendonca"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1047314156918-vi94li53lmdmg402k0rj3ksv1bv7li50.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDghROZH3PTTYyk1SiNGii1jfq5HbD0Y2Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1047314156918-vi94li53lmdmg402k0rj3ksv1bv7li50.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
