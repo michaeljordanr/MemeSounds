@@ -7,8 +7,8 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.michaeljordanr.memesounds.Util
-import com.michaeljordanr.memesounds.Util.unaccent
+import com.michaeljordanr.memesounds.Common
+import com.michaeljordanr.memesounds.Common.unaccent
 import com.michaeljordanr.memesounds.db.BookmarkDao
 import com.michaeljordanr.memesounds.db.BookmarkEntity
 import com.michaeljordanr.memesounds.model.Audio
@@ -60,7 +60,7 @@ class SoundListViewModel @Inject constructor(
 
     private fun getAudioList(): List<Audio> {
         jsonAdapter = moshi.adapter(typeData)
-        val jsonString = Util.loadJSONFromAsset(application, "config.json")
+        val jsonString = Common.loadJSONFromAsset(application, "config.json")
 
         return jsonAdapter.fromJson(jsonString.toString())?.sortedByDescending { it.id } ?: listOf()
     }
@@ -73,7 +73,7 @@ class SoundListViewModel @Inject constructor(
 
     fun play(audioName: String) {
         application.baseContext?.let { context ->
-            val id = Util.getAudioIdFromRaw(context, audioName)
+            val id = Common.getAudioIdFromRaw(context, audioName)
             val soundDescriptor = context.resources.openRawResourceFd(id)
             val soundId = soundPool?.load(soundDescriptor, 1) ?: 0
             soundPool?.setOnLoadCompleteListener { _, _, _ ->
@@ -119,7 +119,7 @@ class SoundListViewModel @Inject constructor(
     fun share() {
         application.baseContext?.let {
             audioSelected?.let { audioSelected ->
-                Util.shareAudio(it, audioSelected)
+                Common.shareAudio(it, audioSelected)
             }
         }
     }

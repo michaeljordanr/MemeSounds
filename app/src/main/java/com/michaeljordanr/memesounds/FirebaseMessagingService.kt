@@ -11,9 +11,7 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.michaeljordanr.memesounds.presentation.MainActivity
 
-
-class CustomFirebaseMessagingService : FirebaseMessagingService() {
-
+class MessagingService: FirebaseMessagingService() {
     companion object {
         const val FCM_NOTIFICATION_ID = 1717
         const val WEB_URL_PARAM = "web_url"
@@ -37,21 +35,20 @@ class CustomFirebaseMessagingService : FirebaseMessagingService() {
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0,
-                intent, PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE)
+            intent, PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE)
         val channelId = "Default"
         val builder = NotificationCompat.Builder(this, channelId)
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle(remoteMessage.notification?.title)
-                .setContentText(remoteMessage.notification?.body).setAutoCancel(true)
-                .setContentIntent(pendingIntent)
+            .setSmallIcon(R.mipmap.ic_launcher)
+            .setContentTitle(remoteMessage.notification?.title)
+            .setContentText(remoteMessage.notification?.body).setAutoCancel(true)
+            .setContentIntent(pendingIntent)
         val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(channelId, "Default channel",
-                    NotificationManager.IMPORTANCE_DEFAULT)
+                NotificationManager.IMPORTANCE_DEFAULT)
             manager.createNotificationChannel(channel)
         }
 
         manager.notify(FCM_NOTIFICATION_ID, builder.build())
     }
-
 }

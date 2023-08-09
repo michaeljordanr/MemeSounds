@@ -31,7 +31,6 @@ class CustomApplication : Application() {
 
     fun sendAnalytics(event: String, params: Map<String, String>) {
         sendFirebaseAnalytics(event, params)
-        sendOthersAnalytics(event, params)
     }
 
     private fun sendFirebaseAnalytics(event: String, params: Map<String, String>) {
@@ -40,9 +39,5 @@ class CustomApplication : Application() {
             bundle.putString(it.key, it.value)
         }
         firebaseAnalytics.logEvent(event, bundle)
-    }
-
-    private fun sendOthersAnalytics(event: String, params: Map<String, String>) {
-
     }
 }

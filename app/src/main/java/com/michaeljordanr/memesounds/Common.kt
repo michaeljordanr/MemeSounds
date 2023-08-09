@@ -12,8 +12,7 @@ import java.io.IOException
 import java.nio.charset.Charset
 import java.text.Normalizer
 
-object Util {
-
+object Common {
     const val AUDIO_FORMAT = ".mp3"
 
     private val REGEX_UNACCENT = "\\p{InCombiningDiacriticalMarks}+".toRegex()

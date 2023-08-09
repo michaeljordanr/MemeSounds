@@ -11,10 +11,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.compose.ui.res.stringResource
 import androidx.core.content.ContextCompat
-import androidx.hilt.navigation.compose.hiltViewModel
-import com.michaeljordanr.memesounds.CustomFirebaseMessagingService
+import com.michaeljordanr.memesounds.MessagingService
 import com.michaeljordanr.memesounds.R
 import com.michaeljordanr.memesounds.ui.theme.MemesoundsTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,7 +38,7 @@ class MainActivity : ComponentActivity() {
         askNotificationPermission()
 
         intent?.extras?.let {
-            val webUrl = it.getString(CustomFirebaseMessagingService.WEB_URL_PARAM)
+            val webUrl = it.getString(MessagingService.WEB_URL_PARAM)
             webUrl?.let { url ->
                 val intent = Intent(Intent.ACTION_VIEW)
                 intent.data = Uri.parse(url)
