@@ -286,5 +286,131 @@
 		"audio_name": "o_amor_esta_no_ar",
 		"audio_description": "O amor está no ar",
 		"audio_thumb": ""
+	},
+	{
+		"id": 47,
+		"audio_name": "parece_inevitavel",
+		"audio_description": "Parece Inevitável",
+		"audio_thumb": ""
+	},
+	{
+		"id": 48,
+		"audio_name": "belo_bigode",
+		"audio_description": "Belo bigode",
+		"audio_thumb": ""
+	},
+	{
+		"id": 49,
+		"audio_name": "cuidado_ze",
+		"audio_description": "Cuidado, Zé",
+		"audio_thumb": ""
+	},
+	{
+		"id": 50,
+		"audio_name": "ele_provoca",
+		"audio_description": "Ele provoca",
+		"audio_thumb": ""
+	},
+	{
+		"id": 51,
+		"audio_name": "ze_pequeno",
+		"audio_description": "Zé Pequeno",
+		"audio_thumb": ""
+	},
+	{
+		"id": 52,
+		"audio_name": "peconhento_diabolico_venenoso",
+		"audio_description": "Peçonhento, diabólico, venenoso",
+		"audio_thumb": ""
+	},
+	{
+		"id": 53,
+		"audio_name": "robertao",
+		"audio_description": "Robertão",
+		"audio_thumb": ""
+	},
+	{
+		"id": 54,
+		"audio_name": "bem_dormido",
+		"audio_description": "Bem dormido!",
+		"audio_thumb": ""
+	},
+	{
+		"id": 55,
+		"audio_name": "colocou_pra_mimi",
+		"audio_description": "Colocou pra mimi",
+		"audio_thumb": ""
+	},
+	{
+		"id": 56,
+		"audio_name": "imoral",
+		"audio_description": "Imoral",
+		"audio_thumb": ""
+	},
+	{
+		"id": 57,
+		"audio_name": "vou_pro_inferno_certamente",
+		"audio_description": "Vou pro inferno certamente",
+		"audio_thumb": ""
+	},
+	{
+		"id": 58,
+		"audio_name": "sadico",
+		"audio_description": "Sádico",
+		"audio_thumb": ""
+	},
+	{
+		"id": 59,
+		"audio_name": "tesouro_malvadao",
+		"audio_description": "Tesouro malvadão",
+		"audio_thumb": ""
+	},
+	{
+		"id": 60,
+		"audio_name": "gostoso_demais",
+		"audio_description": "Gostoso demais!",
+		"audio_thumb": ""
+	},
+	{
+		"id": 61,
+		"audio_name": "um_espetaculo_do_homem_mal",
+		"audio_description": "Um espetáculo do homem mal!",
+		"audio_thumb": ""
+	},
+	{
+		"id": 62,
+		"audio_name": "la_vem_ele_de_novo",
+		"audio_description": "Lá vem ele de novo",
+		"audio_thumb": ""
+	},
+	{
+		"id": 63,
+		"audio_name": "no_desespero",
+		"audio_description": "No desespero",
+		"audio_thumb": ""
+	},
+	{
+		"id": 64,
+		"audio_name": "jararaca_safada_maravilhosa",
+		"audio_description": "Jararaca safada maravilhosa",
+		"audio_thumb": ""
+	},
+	{
+		"id": 65,
+		"audio_name": "fez_de_troxa",
+		"audio_description": "Fez de troxa",
+		"audio_thumb": ""
+	},
+	{
+		"id": 66,
+		"audio_name": "jararaca_saltitante_imortal",
+		"audio_description": "Jararaca saltitante imortal",
+		"audio_thumb": ""
+	},
+	{
+		"id": 67,
+		"audio_name": "pai_papai",
+		"audio_description": "Pai, papai",
+		"audio_thumb": ""
 	}
 ]

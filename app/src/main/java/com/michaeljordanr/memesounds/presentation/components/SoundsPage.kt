@@ -56,7 +56,7 @@ fun SoundsPage(viewModel: SoundListViewModel, sheetState: ModalBottomSheetState)
                     Text(text = stringResource(id = R.string.search_hint))
                 }
             )
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(4.dp))
             LazyVerticalGrid(
                 modifier = Modifier
                     .fillMaxSize(),

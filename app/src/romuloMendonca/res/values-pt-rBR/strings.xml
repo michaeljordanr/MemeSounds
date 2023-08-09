@@ -16,4 +16,5 @@
     <string name="unbookmark">Desfavoritar</string>
     <string name="all">Todos</string>
     <string name="no_bookmarks">Nenhum favorito</string>
+    <string name="notification_denied">Você não receberá notificações</string>
 </resources>

@@ -1,44 +1,26 @@
 package com.michaeljordanr.memesounds
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.content.FileProvider
 import com.michaeljordanr.memesounds.model.Audio
-import org.apache.commons.io.IOUtils
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.io.InputStream
 import java.nio.charset.Charset
+import java.text.Normalizer
 
-object Utils {
+object Util {
+
     const val AUDIO_FORMAT = ".mp3"
 
-    fun getDrawableId(c: Context, imageName: String): Int {
-        val packageName = c.applicationContext.packageName
-        return c.resources.getIdentifier(imageName, "drawable", packageName)
-    }
+    private val REGEX_UNACCENT = "\\p{InCombiningDiacriticalMarks}+".toRegex()
 
-    fun getFileAudio(c: Context, audio: String): File? {
-        try {
-            val id = getAudioIdFromRaw(c, audio)
-            val `in`: InputStream = c.resources.openRawResource(id)
-            val tempFile = File.createTempFile(audio, AUDIO_FORMAT)
-            tempFile.deleteOnExit()
-            val out = FileOutputStream(tempFile)
-            IOUtils.copy(`in`, out)
-
-            return tempFile
-        } catch (e: IOException) {
-            e.printStackTrace()
-
-        }
-
-        return null
+    fun CharSequence.unaccent(): String {
+        val temp = Normalizer.normalize(this, Normalizer.Form.NFD)
+        return REGEX_UNACCENT.replace(temp, "")
     }
 
     fun loadJSONFromAsset(c: Context, file: String): String? {
@@ -74,7 +56,7 @@ object Utils {
             val tmpFile = File(context.cacheDir.toString() + "/$audioName$AUDIO_FORMAT")
             val id = getAudioIdFromRaw(context, audioName)
             val bytes = context.resources.openRawResource(id).use {
-                    it.readBytes()
+                it.readBytes()
             }
             FileOutputStream(tmpFile).use {
                 it.write(bytes)
@@ -105,14 +87,4 @@ object Utils {
             context.packageName
         )
     }
-
-    fun hideKeyboard(activity: Activity) {
-        val view = activity.currentFocus
-        view?.let {
-            val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(view.windowToken, 0)
-        }
-    }
-
-
 }

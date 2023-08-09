@@ -19,6 +19,10 @@ class CustomFirebaseMessagingService : FirebaseMessagingService() {
         const val WEB_URL_PARAM = "web_url"
     }
 
+    override fun onNewToken(p0: String) {
+        super.onNewToken(p0)
+    }
+
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
 
@@ -33,7 +37,7 @@ class CustomFirebaseMessagingService : FirebaseMessagingService() {
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0,
-                intent, PendingIntent.FLAG_ONE_SHOT)
+                intent, PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE)
         val channelId = "Default"
         val builder = NotificationCompat.Builder(this, channelId)
                 .setSmallIcon(R.mipmap.ic_launcher)

@@ -14,4 +14,5 @@
     <string name="unbookmark">Unbookmark</string>
     <string name="all">All</string>
     <string name="no_bookmarks">No bookmarks</string>
+    <string name="notification_denied">You won\'t receive notification</string>
 </resources>

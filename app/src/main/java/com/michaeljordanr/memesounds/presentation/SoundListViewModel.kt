@@ -7,10 +7,11 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.michaeljordanr.memesounds.model.Audio
-import com.michaeljordanr.memesounds.Utils
+import com.michaeljordanr.memesounds.Util
+import com.michaeljordanr.memesounds.Util.unaccent
 import com.michaeljordanr.memesounds.db.BookmarkDao
 import com.michaeljordanr.memesounds.db.BookmarkEntity
+import com.michaeljordanr.memesounds.model.Audio
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
@@ -59,18 +60,20 @@ class SoundListViewModel @Inject constructor(
 
     private fun getAudioList(): List<Audio> {
         jsonAdapter = moshi.adapter(typeData)
-        val jsonString = Utils.loadJSONFromAsset(application, "config.json")
+        val jsonString = Util.loadJSONFromAsset(application, "config.json")
 
-        return jsonAdapter.fromJson(jsonString.toString()) ?: listOf()
+        return jsonAdapter.fromJson(jsonString.toString())?.sortedByDescending { it.id } ?: listOf()
+    }
+
+    fun stop() {
+        if (streamingId > 0) {
+            soundPool?.stop(streamingId)
+        }
     }
 
     fun play(audioName: String) {
         application.baseContext?.let { context ->
-            if (streamingId > 0) {
-                soundPool?.stop(streamingId)
-            }
-
-            val id = Utils.getAudioIdFromRaw(context, audioName)
+            val id = Util.getAudioIdFromRaw(context, audioName)
             val soundDescriptor = context.resources.openRawResourceFd(id)
             val soundId = soundPool?.load(soundDescriptor, 1) ?: 0
             soundPool?.setOnLoadCompleteListener { _, _, _ ->
@@ -97,13 +100,14 @@ class SoundListViewModel @Inject constructor(
             if (query.isNotBlank()) {
                 soundListFilteredState.clear()
                 soundListFilteredState.addAll(_soundListState.filter {
-                    it.audioDescription.uppercase().contains(query.uppercase().trim())
+                    it.audioDescription.unaccent().uppercase()
+                        .contains(query.unaccent().uppercase().trim())
                 })
 
                 bookmarkListFilteredState.clear()
                 bookmarkListFilteredState.addAll(_bookmarkListState.filter {
-                    it.audioDescription.uppercase().contains(
-                        query.uppercase().trim()
+                    it.audioDescription.unaccent().uppercase().contains(
+                        query.unaccent().uppercase().trim()
                     )
                 })
             } else {
@@ -115,7 +119,7 @@ class SoundListViewModel @Inject constructor(
     fun share() {
         application.baseContext?.let {
             audioSelected?.let { audioSelected ->
-                Utils.shareAudio(it, audioSelected)
+                Util.shareAudio(it, audioSelected)
             }
         }
     }
