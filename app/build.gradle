@@ -9,7 +9,7 @@ plugins {
 
 android {
     namespace 'com.michaeljordanr.memesounds'
-    compileSdk 33
+    compileSdk 34
 
     signingConfigs {
         config {
@@ -23,10 +23,9 @@ android {
     defaultConfig {
         applicationId "com.michaeljordanr.memesounds"
         minSdk 24
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
-        flavorDimensions "default"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -40,6 +39,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    flavorDimensions = ["1.0"]
     productFlavors {
         negaoDeRosa {
             applicationId = 'com.michaeljordanr.memesounds.negaoderosa'
@@ -50,8 +50,8 @@ android {
         romuloMendonca {
             applicationId = 'com.michaeljordanr.memesounds.romulomendonca'
             signingConfig signingConfigs.config
-            versionCode 32
-            versionName "3.0.1"
+            versionCode 35
+            versionName "2.0.3"
         }
         seuAntonio {
             applicationId = 'com.michaeljordanr.memesounds.seuantonio'
@@ -90,7 +90,7 @@ dependencies {
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
-    implementation 'com.google.android.play:core:1.10.3'
+    implementation 'com.google.android.play:review:2.0.1'
 
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
@@ -115,6 +115,7 @@ dependencies {
     implementation "androidx.navigation:navigation-compose:2.6.0"
     implementation "com.google.accompanist:accompanist-flowlayout:0.17.0"
     implementation platform('androidx.compose:compose-bom:2022.10.00')
+    implementation 'com.google.android.play:app-update-ktx:2.1.0'
 
     //Dagger - Hilt
     implementation "com.google.dagger:hilt-android:2.44"
