@@ -50,8 +50,8 @@ android {
         romuloMendonca {
             applicationId = 'com.michaeljordanr.memesounds.romulomendonca'
             signingConfig signingConfigs.config
-            versionCode 35
-            versionName "2.0.3"
+            versionCode 36
+            versionName "3.0.4"
         }
         seuAntonio {
             applicationId = 'com.michaeljordanr.memesounds.seuantonio'
